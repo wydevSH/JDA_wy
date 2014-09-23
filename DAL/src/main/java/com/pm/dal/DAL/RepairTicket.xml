@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+   "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<!-- 通过typeAlias使得我们在下面使用Student实体类的时候不需要写包名 -->
+	<typeAlias alias="RepairTicket" type="com.pm.pojo.RepairTicket" />
+
+	<!-- 这样以后改了sql，就不需要去改java代码了 -->
+	<!-- id表示select里的sql语句，resultClass表示返回结果的类型 -->
+	<select id="selectAllRepairTicket" resultClass="RepairTicket">
+		select * from tbl_RepairTicket
+	</select>
+
+	<!-- parameterClass表示参数的内容 -->
+	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
+	<select id="selectRepairTicketById" parameterClass="String" resultClass="RepairTicket">
+		select RepairTicketID,RUserID,RTicketSubject,RTicketContent,RContactTime,RHandler,RHandlerPhone,RResumeTimes,RStatus,RComment,RUpdateTime,RCount from tbl_RepairTicket
+		where RepairTicketID = #RepairTicketID#
+	</select>
+
+
+	<select id="selectRepairTicket" parameterClass="java.util.Map" resultClass="RepairTicket">
+		select	 RepairTicketID,RUserID,RTicketSubject,RTicketContent,RContactTime,RHandler,RHandlerPhone,RResumeTimes,RStatus,RComment,RUpdateTime,RCount from tbl_RepairTicket
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="and" property="time_update"> 
+			  RUpdateTime >=#time_pub#
+			</isNotNull> 
+			<isNotNull prepend="and" property="user_id"> 
+			 	 RUserID =#user_id#
+			</isNotNull> 
+		</dynamic>
+		 <dynamic prepend=""> 
+          	<isNotNull property="_start"> 
+               <isNotNull property="_size"> 
+                 	limit #_start#, #_size# 
+                 </isNotNull> 
+            </isNotNull> 
+           </dynamic> 
+           order by RUpdateTime desc
+	</select>
+
+
+
+	<insert id="addRepairTicket" parameterClass="RepairTicket">
+		insert into tbl_RepairTicket(RepairTicketID,RUserID,RTicketSubject,RTicketContent,RContactTime,RHandler,RHandlerPhone,RResumeTimes,RStatus,RComment,RUpdateTime,RCount)
+		values(#RepairTicketID#,#RUserID#,#RTicketSubject#,#RTicketContent#,#RContactTime#,#RHandler#,#RHandlerPhone#,#RResumeTimes,#RStatus#,#RComment#,#RUpdateTime#,#RCount#)
+	</insert>
+
+	<delete id="deleteRepairTicketById" parameterClass="String">
+		<!-- #id#里的id可以随意取，但是上面的insert则会有影响，因为上面的name会从Student里的属性里去查找 -->
+		<!-- 我们也可以这样理解，如果有#占位符，则ibatis会调用parameterClass里的属性去赋值 -->
+		delete from tbl_RepairTicket where RepairTicketID = #RepairTicketID#
+	</delete>
+
+	<update id="updateRepairTicket" parameterClass="RepairTicket">
+		update tbl_RepairTicket
+		set RepairTicketID=#RepairTicketID#,RUserID=#RUserID#,RTicketSubject=#RTicketSubject#,RTicketContent=#RTicketContent#,RContactTime=#RContactTime#,RHandler=#RHandler#,RHandlerPhone=#RHandlerPhone#,RResumeTimes=#RResumeTimes#,RStatus=#RStatus#,RComment=#RComment#,RUpdateTime=#RUpdateTime#,RCount=#RCount#
+		where RepairTicketID = #RepairTicketID#
+	</update>
+
+</sqlMap>

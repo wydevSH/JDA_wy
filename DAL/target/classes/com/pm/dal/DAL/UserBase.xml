@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+   "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<!-- 通过typeAlias使得我们在下面使用Student实体类的时候不需要写包名 -->
+	<typeAlias alias="User" type="com.pm.pojo.User" />
+
+	<!-- 这样以后改了sql，就不需要去改java代码了 -->
+	<!-- id表示select里的sql语句，resultClass表示返回结果的类型 -->
+	<select id="selectAllUser" resultClass="User">
+		select * from tbl_User
+	</select>
+
+	<!-- parameterClass表示参数的内容 -->
+	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
+	<select id="selectUserById" parameterClass="String" resultClass="User">
+		select  UID,UNickname,UPhone,UPassword,URole,URegTime,URealName,UGender,UBirthday,UProfession,UBuilding,URoom,UFamilyNO,UQQNum,UCarNums from tbl_User where UID=#UID#
+	</select>
+
+
+	<!-- 注意这里的resultClass类型，使用Student类型取决于queryForList还是queryForObject -->
+	<select id="selectUserByPhone" parameterClass="String"
+		resultClass="UserBase">
+		select UID,UNickname,UPhone,UPassword,URole,URegTime,URealName,UGender,UBirthday,UProfession,UBuilding,URoom,UFamilyNO,UQQNum,UCarNums from tbl_User where UPhone = #phone#
+	</select>
+
+	<insert id="addUser" parameterClass="User">
+		insert into
+		tbl_User(UID,UNickname,UPhone,UPassword,URole,URegTime,URealName,UGender,UBirthday,UProfession,UBuilding,URoom,UFamilyNO,UQQNum,UCarNums) values
+		(#UID#,#UNickname#,#UPhone#,#UPassword#,#URole#,#URegTime#,#URealName#,#UGender#,#UBirthday#,#UProfession#,#UBuilding#,#URoom#,#UFamilyNO#,#UQQNum#,#UCarNums#);
+	</insert>
+
+	<delete id="deleteUserById" parameterClass="String">
+		<!-- #id#里的id可以随意取，但是上面的insert则会有影响，因为上面的name会从Student里的属性里去查找 -->
+		<!-- 我们也可以这样理解，如果有#占位符，则ibatis会调用parameterClass里的属性去赋值 -->
+		delete from tbl_UserBase where UID=#UID#
+	</delete>
+
+	<update id="updateUser" parameterClass="User">
+		update tbl_User set
+		UNickname=#UNickname#,UPhone=#UPhone#,UPassword=#UPassword#,URole=#URole#,URegTime=#URegTime#,URealName = #URealName#,UGender = #UGender#,UBirthday = #UBirthday#,UProfession = #UProfession#,UBuilding = #UBuilding#,URoom = #URoom#,UFamilyNO = #UFamilyNO#,UQQNum = #UQQNum#,UCarNums = #UCarNums# where UID=#UID#
+	</update>
+
+</sqlMap>

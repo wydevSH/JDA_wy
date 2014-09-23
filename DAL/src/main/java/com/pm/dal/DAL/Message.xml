@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+   "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<!-- 通过typeAlias使得我们在下面使用Student实体类的时候不需要写包名 -->
+	<typeAlias alias="Message" type="com.pm.pojo.Message" />
+
+	<!-- 这样以后改了sql，就不需要去改java代码了 -->
+	<!-- id表示select里的sql语句，resultClass表示返回结果的类型 -->
+	<select id="selectAllMessage" resultClass="Message">
+		select MID, MRelatedUserID, MType,MContent, MTimeCreated from tbl_Message
+	</select>
+
+	<!-- parameterClass表示参数的内容 -->
+	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
+	<select id="selectMessageById" parameterClass="String" resultClass="Message">
+		select MID, MRelatedUserID, MType,MContent, MTimeCreated from tbl_Message
+		where MID = #id#
+	</select>
+
+	<select id="selectMessage" parameterClass="java.util.Map" resultClass="Message">
+		select MID, MRelatedUserID, MType,MContent, MTimeCreated from tbl_Message
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="and" property="time_pub"> 
+			  MTimeCreated >=#time_pub#
+			</isNotNull> 
+		</dynamic>
+		 <dynamic prepend=""> 
+          	<isNotNull property="_start"> 
+               <isNotNull property="_size"> 
+                 	limit #_start#, #_size# 
+                 </isNotNull> 
+            </isNotNull> 
+           </dynamic> 
+           order by MTimeCreated desc
+	</select>
+
+
+
+	<insert id="addMessage" parameterClass="Message">
+	insert into tbl_Message( MID, MRelatedUserID, MType,MContent, MTimeCreated )
+	values( #MID#, #MRelatedUserID#, #MType#,#MContent#, #MTimeCreated#)
+	</insert>
+
+	<delete id="deleteMessageById" parameterClass="String">
+		<!-- #id#里的id可以随意取，但是上面的insert则会有影响，因为上面的name会从Student里的属性里去查找 -->
+		<!-- 我们也可以这样理解，如果有#占位符，则ibatis会调用parameterClass里的属性去赋值 -->
+		delete from tbl_Message where MessageID = #MID#
+	</delete>
+
+	<update id="updateMessage" parameterClass="Message">
+		update tbl_Message
+		set MID=#MID#, MRelatedUserID=#MRelatedUserID#, MType=#MType#,MContent=#MContent#, MTimeCreated=#MTimeCreated#
+		where MID=#MID#
+	</update>
+
+</sqlMap>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+   "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<!-- 通过typeAlias使得我们在下面使用Student实体类的时候不需要写包名 -->
+	<typeAlias alias="Post" type="com.pm.pojo.Post" />
+
+	<!-- 这样以后改了sql，就不需要去改java代码了 -->
+	<!-- id表示select里的sql语句，resultClass表示返回结果的类型 -->
+	<select id="selectAllPost" resultClass="Post">
+		select * from tbl_Post
+	</select>
+
+	<!-- parameterClass表示参数的内容 -->
+	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
+	<select id="selectPostById" parameterClass="String" resultClass="Post">
+		select PostID,PUserID,PSubmitTime,PIsVadilated,PSubject,PBodyText,PReplyNum,PClickNum,PState,PLastReplierID,PLastRepTime
+		from tbl_post
+		where PostID = #id#
+	</select>
+
+	<insert id="addPost" parameterClass="Post">
+		insert into tbl_post(PostID,PUserID,PSubmitTime,PIsVadilated,PSubject,PBodyText,PReplyNum,PClickNum,PState,PLastReplierID,PLastRepTime)
+		values(#PUserID#,#PSubmitTime#,#PIsVadilated#,#PSubject#,#PBodyText#,#PReplyNum#,#PClickNum#,#PState#,#PLastReplierID#,#PLastRepTime#)
+	</insert>
+
+	<delete id="deletePostById" parameterClass="String">
+		<!-- #id#里的id可以随意取，但是上面的insert则会有影响，因为上面的name会从Student里的属性里去查找 -->
+		<!-- 我们也可以这样理解，如果有#占位符，则ibatis会调用parameterClass里的属性去赋值 -->
+		delete from tbl_post
+		where PostID = #id#
+
+	</delete>
+
+	<update id="updatePost" parameterClass="Post">
+		update tbl_post
+		set PUserID = #PUserID#,PSubmitTime = #PSubmitTime#,PIsVadilated = #PIsVadilated#,PSubject = #PSubject#,PBodyText = #PBodyText#,PReplyNum = #PReplyNum#,PClickNum = #PClickNum#,PState = #PState#,PLastReplierID = #PLastReplierID#,PLastRepTime = #PLastRepTime#
+		where PostID = #id#
+	</update>
+
+</sqlMap>
