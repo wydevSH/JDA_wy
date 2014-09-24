@@ -32,10 +32,10 @@ public class BiotopeDaoImpl {
 	public Biotope addBiotope(Biotope biotope) throws Exception {
 		// TODO Auto-generated method stub
 	
-			if(this.IsExsitBiotopeByPhone(biotope.getUPhone()))
-				return null;	
-			biotope.setUID(String.valueOf(System.currentTimeMillis()));
-			sqlMapClient.insert("addBiotope", biotope);		
+//			if(this(biotope。))
+//				return null;	
+//			biotope(String.valueOf(System.currentTimeMillis()));
+//			sqlMapClient.insert("addBiotope", biotope);		
 		
 			return biotope;
 	}
@@ -112,21 +112,21 @@ public class BiotopeDaoImpl {
 		// TODO Auto-generated method stub		
 		
 			
-			if(biotope.getUID()==null ||biotope.getUID().equals("")){//never add before 
+//			if(biotope.getUID()==null ||biotope.getUID().equals("")){//never add before 
+//			
+//			    if(biotope.getUPhone()==null || biotope.getUPhone().equals("")||this.IsExsitBiotopeByPhone(biotope.getUPhone()))//check whether add some phone
+//			    	return null;
+//				 biotope.setUID(String.valueOf(Calendar.getInstance().getTimeInMillis() ));
+//				 return this.addBiotope(biotope);
+//			}
+//			else{
+//				if(!this.IsExsitBiotopeById(biotope.getUID()))
+//					return null;
+//				  this.updateBiotope(biotope);	
+//				  return biotope;
+//			}
 			
-			    if(biotope.getUPhone()==null || biotope.getUPhone().equals("")||this.IsExsitBiotopeByPhone(biotope.getUPhone()))//check whether add some phone
-			    	return null;
-				 biotope.setUID(String.valueOf(Calendar.getInstance().getTimeInMillis() ));
-				 return this.addBiotope(biotope);
-			}
-			else{
-				if(!this.IsExsitBiotopeById(biotope.getUID()))
-					return null;
-				  this.updateBiotope(biotope);	
-				  return biotope;
-			}
-			
-	
+	     return null;
 
 	}
 }

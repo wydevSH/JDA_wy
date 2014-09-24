@@ -32,10 +32,10 @@ public class CommentDaoImpl {
 	public Comment addComment(Comment comment) throws Exception {
 		// TODO Auto-generated method stub
 	
-			if(this.IsExsitCommentByPhone(comment.getUPhone()))
-				return null;	
-			comment.setUID(String.valueOf(System.currentTimeMillis()));
-			sqlMapClient.insert("addComment", comment);		
+//			if(this.IsExsitCommentByPhone(comment.getUPhone()))
+//				return null;	
+//			comment.setUID(String.valueOf(System.currentTimeMillis()));
+//			sqlMapClient.insert("addComment", comment);		
 		
 			return comment;
 	}
@@ -112,21 +112,21 @@ public class CommentDaoImpl {
 		// TODO Auto-generated method stub		
 		
 			
-			if(comment.getUID()==null ||comment.getUID().equals("")){//never add before 
-			
-			    if(comment.getUPhone()==null || comment.getUPhone().equals("")||this.IsExsitCommentByPhone(comment.getUPhone()))//check whether add some phone
-			    	return null;
-				 comment.setUID(String.valueOf(Calendar.getInstance().getTimeInMillis() ));
-				 return this.addComment(comment);
-			}
-			else{
-				if(!this.IsExsitCommentById(comment.getUID()))
-					return null;
-				  this.updateComment(comment);	
-				  return comment;
-			}
-			
-	
+//			if(comment.getUID()==null ||comment.getUID().equals("")){//never add before 
+//			
+//			    if(comment.getUPhone()==null || comment.getUPhone().equals("")||this.IsExsitCommentByPhone(comment.getUPhone()))//check whether add some phone
+//			    	return null;
+//				 comment.setUID(String.valueOf(Calendar.getInstance().getTimeInMillis() ));
+//				 return this.addComment(comment);
+//			}
+//			else{
+//				if(!this.IsExsitCommentById(comment.getUID()))
+//					return null;
+//				  this.updateComment(comment);	
+//				  return comment;
+//			}
+//			
+			return null;
 
 	}
 }

@@ -108,22 +108,22 @@ public class UserDaoImpl implements IUserDao{
 	}
 	
 	
-	public User Save(User userbase) throws Exception {
+	public User Save(User user) throws Exception {
 		// TODO Auto-generated method stub		
 		
 			
-			if(userbase.getUID()==null ||userbase.getUID().equals("")){//never add before 
+			if(user.getUID()==null ||user.getUID().equals("")){//never add before 
 			
-			    if(userbase.getUPhone()==null || userbase.getUPhone().equals("")||this.IsExsitUserByPhone(userbase.getUPhone()))//check whether add some phone
+			    if(user.getUPhone()==null || user.getUPhone().equals("")||this.IsExsitUserByPhone(user.getUPhone()))//check whether add some phone
 			    	return null;
-				 userbase.setUID(String.valueOf(Calendar.getInstance().getTimeInMillis() ));
-				 return this.addUser(userbase);
+				 user.setUID(String.valueOf(Calendar.getInstance().getTimeInMillis() ));
+				 return this.addUser(user);
 			}
 			else{
-				if(!this.IsExsitUserById(userbase.getUID()))
+				if(!this.IsExsitUserById(user.getUID()))
 					return null;
-				  this.updateUser(userbase);	
-				  return userbase;
+				  this.updateUser(user);	
+				  return user;
 			}
 			
 	

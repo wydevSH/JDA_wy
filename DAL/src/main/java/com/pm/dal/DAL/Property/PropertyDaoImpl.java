@@ -31,10 +31,10 @@ public class PropertyDaoImpl {
 	public Property addProperty(Property property) throws Exception {
 		// TODO Auto-generated method stub
 	
-			if(this.IsExsitPropertyByPhone(property.getUPhone()))
-				return null;	
-			property.setUID(String.valueOf(System.currentTimeMillis()));
-			sqlMapClient.insert("addProperty", property);		
+//			if(this.IsExsitPropertyByPhone(property.getUPhone()))
+//				return null;	
+//			property.setUID(String.valueOf(System.currentTimeMillis()));
+//			sqlMapClient.insert("addProperty", property);		
 		
 			return property;
 	}

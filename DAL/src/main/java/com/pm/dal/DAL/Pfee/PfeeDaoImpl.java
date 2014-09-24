@@ -31,10 +31,10 @@ public class PfeeDaoImpl {
 	public Pfee addPfee(Pfee pfee) throws Exception {
 		// TODO Auto-generated method stub
 	
-			if(this.IsExsitPfeeByPhone(pfee.getUPhone()))
-				return null;	
-			pfee.setUID(String.valueOf(System.currentTimeMillis()));
-			sqlMapClient.insert("addPfee", pfee);		
+//			if(this.IsExsitPfeeByPhone(pfee.getUPhone()))
+//				return null;	
+//			pfee.setUID(String.valueOf(System.currentTimeMillis()));
+//			sqlMapClient.insert("addPfee", pfee);		
 		
 			return pfee;
 	}

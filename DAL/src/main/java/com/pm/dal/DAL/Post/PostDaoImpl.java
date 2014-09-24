@@ -31,10 +31,10 @@ public class PostDaoImpl {
 	public Post addPost(Post post) throws Exception {
 		// TODO Auto-generated method stub
 	
-			if(this.IsExsitPostByPhone(post.getUPhone()))
-				return null;	
-			post。(String.valueOf(System.currentTimeMillis()));
-			sqlMapClient.insert("addPost", post);		
+//			if(this.IsExsitPostByPhone(post.getUPhone()))
+//				return null;	
+//			post。(String.valueOf(System.currentTimeMillis()));
+//			sqlMapClient.insert("addPost", post);		
 		
 			return post;
 	}
