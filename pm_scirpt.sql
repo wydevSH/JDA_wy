@@ -2,7 +2,7 @@ CREATE DATABASE `PropertyManagement` CHARACTER SET 'utf8' COLLATE 'utf8_general_
 
 DROP TABLE IF EXISTS tbl_user;
 CREATE TABLE tbl_user(
-					UID			varchar(10) NOT NULL,
+					UID			varchar(20) NOT NULL,
 					UNickname		varchar(10) DEFAULT '' ,
 					UPhone		varchar(10) NOT NULL,
 					UPassword		varchar(15)	NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE tbl_user(
 					UBirthday		date		NOT NULL,
 					UProfession	varchar(6) 	DEFAULT 0,
 					UBuilding		int 		DEFAULT 0,
-					URoom			varchar(5)	NOT NULL,
+					URoom			varchar(5)	DEFAULT '',
 					UFamilyNO		int 		DEFAULT 0,
 					UQQNum		varchar(20) DEFAULT	'',
 					UCarNums		varchar(20) DEFAULT	'',
