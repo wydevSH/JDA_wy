@@ -10,7 +10,7 @@ import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 import com.pm.pojo.Biotope;
 
-public class BiotopeDaoImpl {
+public class BiotopeDaoImpl implements IBiotopeDao{
 	
 	private static  SqlMapClient sqlMapClient = null;
 	
@@ -32,12 +32,17 @@ public class BiotopeDaoImpl {
 	public Biotope addBiotope(Biotope biotope) throws Exception {
 		// TODO Auto-generated method stub
 	
-//			if(this(biotope。))
-//				return null;	
-//			biotope(String.valueOf(System.currentTimeMillis()));
-//			sqlMapClient.insert("addBiotope", biotope);		
+		boolean flag = false;
+		int object = 0;
+
+		object = sqlMapClient.update("addBiotope", biotope);
 		
+		if (object != 0) {
 			return biotope;
+
+		}
+		return null;
+			
 	}
 
 	public boolean deleteBiotopeById(String id) throws SQLException {
@@ -54,7 +59,7 @@ public class BiotopeDaoImpl {
 		return flag;
 	}
 
-	public boolean updateBiotope(Biotope biotope) throws SQLException {
+	public Biotope updateBiotope(Biotope biotope) throws SQLException {
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		int object = 0;
@@ -62,37 +67,37 @@ public class BiotopeDaoImpl {
 		object = sqlMapClient.update("updateBiotope", biotope);
 		
 		if (object != 0) {
-			flag = true;
+			return biotope;
 
 		}
-		return flag;
+		return null;
 	}
 
 
-	public Biotope selectBiotopeByPhone(String phone) throws SQLException {
+	public Biotope selectBiotopeByName(String name) throws SQLException {
 		// TODO Auto-generated method stub
-		Biotope User = null;
+		Biotope bitope = null;
 		
-		User = (Biotope) sqlMapClient.queryForObject("selectBiotopeByPhone",phone);
+		bitope = (Biotope) sqlMapClient.queryForObject("selectBiotopeByName",name);
 		
-		return User;
+		return bitope;
 	}
 
 	public Biotope selectBiotopeById(String id) throws SQLException {
 		// TODO Auto-generated method stub
-		Biotope User = null;
+		Biotope bitope = null;
 		
-		User = (Biotope) sqlMapClient.queryForObject("selectBiotopeById", id);
+		bitope = (Biotope) sqlMapClient.queryForObject("selectBiotopeById", id);
 	
-		return User;
+		return bitope;
 	}
 
-	public boolean IsExsitBiotopeByPhone(String phone) throws SQLException {
+	public boolean IsExsitBiotopeByName(String name) throws SQLException {
 		// TODO Auto-generated method stub	
 		
-		Biotope user = (Biotope) sqlMapClient.queryForObject("selectBiotopeByPhone", phone);
+		Biotope bitope = (Biotope) sqlMapClient.queryForObject("selectBiotopeByName", name);
 		
-		return user != null;
+		return bitope != null;
 		
 	
 	}
@@ -109,24 +114,24 @@ public class BiotopeDaoImpl {
 	
 	
 	public Biotope Save(Biotope biotope) throws Exception {
-		// TODO Auto-generated method stub		
+		// TODO Auto-generated method stub			
 		
+		if(biotope.getBiotopeID()==null ||biotope.getBiotopeID().equals("")){
+			if(biotope.getBBiotopeName()== null ||biotope.getBAddress().equals(""))
+				return null;
+			if(biotope.getBAddress()== null ||biotope.getBAddress().equals("") )
+				return null;
+			return this.addBiotope(biotope);
 			
-//			if(biotope.getUID()==null ||biotope.getUID().equals("")){//never add before 
-//			
-//			    if(biotope.getUPhone()==null || biotope.getUPhone().equals("")||this.IsExsitBiotopeByPhone(biotope.getUPhone()))//check whether add some phone
-//			    	return null;
-//				 biotope.setUID(String.valueOf(Calendar.getInstance().getTimeInMillis() ));
-//				 return this.addBiotope(biotope);
-//			}
-//			else{
-//				if(!this.IsExsitBiotopeById(biotope.getUID()))
-//					return null;
-//				  this.updateBiotope(biotope);	
-//				  return biotope;
-//			}
+		}
+		else{
+			if(!this.IsExsitBiotopeById(biotope.getBiotopeID()))
+				return null;
+				
+			return this.updateBiotope(biotope);
 			
-	     return null;
+			
+		}
 
 	}
 }

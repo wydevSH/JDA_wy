@@ -3,6 +3,7 @@ package com.pm.dal.DAL.Notice;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -112,6 +113,10 @@ public class NoticeDaoImpl implements INoticeDao{
 		
 		if(notice.getNoticeID()==null ||notice.getNoticeID().equals(""))
 		{			
+			if(notice.getNPoster()==null ||notice.getNPoster().equals("") )
+				return null;
+			
+			notice.setNoticeID((String.valueOf(Calendar.getInstance().getTimeInMillis() )));
 			return this.addNotice(notice);			
 		}
 		

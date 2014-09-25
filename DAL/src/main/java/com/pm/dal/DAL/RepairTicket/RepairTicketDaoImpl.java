@@ -97,7 +97,7 @@ public class RepairTicketDaoImpl implements IRepairTicketDao{
 		if(repairticket.getRepairTicketID()==null ||repairticket.getRepairTicketID().equals("")){//never add before 			
 			 
 			repairticket.setRepairTicketID((String.valueOf(Calendar.getInstance().getTimeInMillis() )));
-			 return this.addRepairTicket(repairticket);
+			return this.addRepairTicket(repairticket);
 		}
 		else{
 			if(!this.IsExsitRepairTicketById(repairticket.getRepairTicketID())){//this is wrong!

@@ -9,12 +9,12 @@ public interface IBiotopeDao {
 
 	public boolean deleteBiotopeById(String id)throws Exception;
 
-	public boolean IsExsitBiotopeByName(String Phone)throws Exception;
+	public boolean IsExsitBiotopeByName(String name)throws Exception;
 
-	public boolean updateBiotope(Biotope biotope) throws Exception;
+	public Biotope updateBiotope(Biotope biotope) throws Exception;
 
 
-	public Biotope selectBiotopeById(String UID)throws Exception;
+	public Biotope selectBiotopeById(String BID)throws Exception;
 	
 	public Biotope Save(Biotope biotope)throws Exception;
 }

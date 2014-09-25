@@ -53,7 +53,7 @@ public class PropertyDaoImpl {
 		return flag;
 	}
 
-	public boolean updateProperty(Property property) throws SQLException {
+	public Property updateProperty(Property property) throws SQLException {
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		int object = 0;
@@ -61,21 +61,23 @@ public class PropertyDaoImpl {
 		object = sqlMapClient.update("updateProperty", property);
 		
 		if (object != 0) {
-			flag = true;
+			return property;
 
 		}
-		return flag;
+		return null;
 	}
 
-
-	public Property selectPropertyByPhone(String phone) throws SQLException {
-		// TODO Auto-generated method stub
-		Property property = null;
-		
-		property = (Property) sqlMapClient.queryForObject("selectPropertyByPhone",phone);
-		
-		return property;
-	}
+/*
+ *  this method need to be dicuss 
+ */
+//	public Property selectPropertyByPhone(String phone) throws SQLException {
+//		// TODO Auto-generated method stub
+//		Property property = null;
+//		
+//		property = (Property) sqlMapClient.queryForObject("selectPropertyByPhone",phone);
+//		
+//		return property;
+//	}
 
 	public Property selectPropertyById(String id) throws SQLException {
 		// TODO Auto-generated method stub

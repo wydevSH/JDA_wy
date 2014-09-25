@@ -3,13 +3,14 @@ package com.pm.dal.DAL.Pfee;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 import com.pm.pojo.Pfee;
 
-public class PfeeDaoImpl {
+public class PfeeDaoImpl implements IPfeeDao {
 
 	private static  SqlMapClient sqlMapClient = null;
 	
@@ -30,13 +31,18 @@ public class PfeeDaoImpl {
 	
 	public Pfee addPfee(Pfee pfee) throws Exception {
 		// TODO Auto-generated method stub
-	
-//			if(this.IsExsitPfeeByPhone(pfee.getUPhone()))
-//				return null;	
-//			pfee.setUID(String.valueOf(System.currentTimeMillis()));
-//			sqlMapClient.insert("addPfee", pfee);		
+
+			boolean flag = false;
+			int object = 0;
+			pfee.setPMFeeID(String.valueOf(System.currentTimeMillis()));
+			object =(Integer)sqlMapClient.insert("addPfee", pfee);
 		
-			return pfee;
+			if (object != 0) {
+				
+				return pfee;
+			}
+		
+			return null;
 	}
 
 	public boolean deletePfeeById(String id) throws SQLException {
@@ -53,7 +59,7 @@ public class PfeeDaoImpl {
 		return flag;
 	}
 
-	public boolean updatePfee(Pfee pfee) throws SQLException {
+	public Pfee updatePfee(Pfee pfee) throws SQLException {
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		int object = 0;
@@ -61,10 +67,10 @@ public class PfeeDaoImpl {
 		object = sqlMapClient.update("updatePfee", pfee);
 		
 		if (object != 0) {
-			flag = true;
+			return pfee;
 
 		}
-		return flag;
+		return null;
 	}
 
 
@@ -109,12 +115,31 @@ public class PfeeDaoImpl {
 	
 	public Pfee Save(Pfee pfee) throws Exception {
 		
+		if(pfee.getPMFeeID()==null ||pfee.getPMFeeID().equals(""))
+		{			
+			if(pfee.getFComments()==null ||pfee.getFComments().equals("") )
+				return null;
+			
+			pfee.setPMFeeID((String.valueOf(Calendar.getInstance().getTimeInMillis() )));
+			return this.addPfee(pfee);			
+		}
+		
+		if(IsExsitPfeeById(pfee.getPMFeeID())){
+			return this.updatePfee(pfee);
+		}
 		
 		
 		return pfee;
 	
 	}
-	
+
+
+
+
+
+
+
+
 	
 	
 }

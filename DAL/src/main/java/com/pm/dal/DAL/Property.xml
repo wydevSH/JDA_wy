@@ -24,7 +24,7 @@
 
 	<insert id="addProperty" parameterClass="Property">
 		insert into tbl_property(PropertyID,PPropertyNamePCity,PQualification,PManager,PManagerPhone)
-		values(#PPropertyNamePCity#,#PQualification#,#PManager#,#PManagerPhone#)
+		values(#PropertyID#,#PPropertyNamePCity#,#PQualification#,#PManager#,#PManagerPhone#)
 
 	</insert>
 
@@ -37,7 +37,7 @@
 	<update id="updateProperty" parameterClass="Property">
 		update tbl_property
 		set PPropertyNamePCity = #PPropertyNamePCity#,PQualification = #PQualification#,PManager = #PManager#,PManagerPhone = #PManagerPhone#
-		where PropertyID = #id#
+		where PropertyID = #PropertyID#
 	</update>
 
 </sqlMap>

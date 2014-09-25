@@ -50,5 +50,54 @@ public class UserBaseDaoImplTest extends TestCase {
 		
 		
 	}
+	
+	
+	@Test
+	public void testmultiinsertuser() throws Exception
+	{
+		
+		IUserDao dao= new UserDaoImpl();
+		
+		User user=new User();
+    	
+		user.setUPhone("11231");
+		user.setUPassword("11234");
+		user.setURegTime(new Date());
+		user.setUBirthday(new Date());
+		user.setUGender(0);
+	    User u1 = dao.Save(user);
+	    user.setUID("11234");
+		user.setUPassword("11234");
+		user.setURegTime(new Date());
+		user.setUBirthday(new Date());
+		user.setUGender(0);
+		u1= dao.Save(user);
+	    Assert.assertNull(u1);
+		
+		
+		
+	}
+	
+	@Test
+	public void testequaluser() throws Exception
+	{
+		
+		IUserDao dao= new UserDaoImpl();
+		
+		User user=new User();
+    	
+		user.setUPhone("112316");
+		user.setUPassword("11234");
+		user.setURegTime(new Date());
+		user.setUBirthday(new Date());
+		user.setUGender(0);
+	    User u1 = dao.Save(user);
+	    User u2=dao.selectUserByPhone(user.getUPhone());
+	    Assert.assertEquals(u1.getUID(), u2.getUID());
+		
+		
+		
+	}
+	
 
 }

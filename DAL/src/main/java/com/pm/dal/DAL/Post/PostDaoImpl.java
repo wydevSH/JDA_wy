@@ -53,7 +53,7 @@ public class PostDaoImpl {
 		return flag;
 	}
 
-	public boolean updatePost(Post post) throws SQLException {
+	public Post updatePost(Post post) throws SQLException {
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		int object = 0;
@@ -61,10 +61,10 @@ public class PostDaoImpl {
 		object = sqlMapClient.update("updatePost", post);
 		
 		if (object != 0) {
-			flag = true;
+			return post;
 
 		}
-		return flag;
+		return null;
 	}
 
 
@@ -86,15 +86,16 @@ public class PostDaoImpl {
 		return User;
 	}
 
-	public boolean IsExsitPostByPhone(String phone) throws SQLException {
-		// TODO Auto-generated method stub	
-		
-		Post user = (Post) sqlMapClient.queryForObject("selectPostByPhone", phone);
-		
-		return user != null;
-		
-	
-	}
+// to be discussed !	
+//	public boolean IsExsitPostByPhone(String phone) throws SQLException {
+//		// TODO Auto-generated method stub	
+//		
+//		Post user = (Post) sqlMapClient.queryForObject("selectPostByPhone", phone);
+//		
+//		return user != null;
+//		
+//	
+//	}
 
 	
 	public boolean IsExsitPostById(String uid) throws SQLException {

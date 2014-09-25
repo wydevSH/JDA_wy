@@ -126,8 +126,8 @@ public class ComplaintDaoImpl implements IComplaintDao {
 				if(!this.IsExsitComplaintById(complaint.getComplaintID())){//this is wrong!
 					return null;
 				}
-				 this.updateComplaint(complaint);	
-				 return complaint;
+				
+				 return this.updateComplaint(complaint);
 			}
 			
 	

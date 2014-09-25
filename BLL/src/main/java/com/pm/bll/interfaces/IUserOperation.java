@@ -1,6 +1,6 @@
 package com.pm.bll.interfaces;
 
-import com.pm.pojo.UserBase;
+import com.pm.pojo.User;
 
 
 
@@ -11,11 +11,11 @@ import com.pm.pojo.UserBase;
  * 
  *
  */
-public interface IUserBaseOperation {
+public interface IUserOperation {
 
 	
-	public UserBase GetUserByID(String ID) throws Exception;
-	public UserBase GetUserByPhone(String phone) throws Exception;
+	public User GetUserByID(String ID) throws Exception;
+	public User GetUserByPhone(String phone) throws Exception;
 	public Boolean deleteUserByID(String ID) throws Exception;
-	public UserBase Save(UserBase user) throws Exception;
+	public User Save(User user) throws Exception;
 }
