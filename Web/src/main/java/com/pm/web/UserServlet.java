@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -16,16 +15,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
 import com.pm.bll.beans.UserBean;
-import com.pm.bll.interfaces.IUserBaseOperation;
-import com.pm.pojo.UserBase;
+import com.pm.bll.interfaces.IUserOperation;
+import com.pm.pojo.User;
 
 
 
 public class UserServlet extends HttpServlet{
 
-    public UserServlet() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public UserServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -69,12 +72,12 @@ public class UserServlet extends HttpServlet{
 				requestBody.append(buffer);
 			}      
 	    
-			IUserBaseOperation operation =new UserBean();
-			if(MethodName.equalsIgnoreCase("adduser"))
+			IUserOperation operation =new UserBean();
+			if(MethodName.equalsIgnoreCase("SaveUser"))
 			{
 				System.out.println("in the method ["+MethodName+"]");
 				ret.put("MethodName", MethodName);
-				UserBase user=gson.fromJson(requestBody.toString(), UserBase.class);
+				User user=gson.fromJson(requestBody.toString(), User.class);
 				user = operation.Save(user);
 				ret.put("retVal", user);
 				ret.put("status",Long.valueOf(0));
@@ -82,18 +85,42 @@ public class UserServlet extends HttpServlet{
 			
 			 
 			}
-			else if(MethodName.equalsIgnoreCase("existsuser"))
+			else if(MethodName.equalsIgnoreCase("ExistsUser"))
 			{
 				ret.put("MethodName", MethodName);
 				String phone=gson.fromJson(requestBody.toString(), String.class);
-				UserBase user=operation.GetUserByPhone(phone);
+				User user=operation.GetUserByPhone(phone);
 			
 				ret.put("retVal", user);
 				ret.put("status",Long.valueOf(0));
 			 
 			 
 			}
-		
+			else if(MethodName.equalsIgnoreCase("Signin"))
+			{
+				ret.put("MethodName", MethodName);
+				User user=gson.fromJson(requestBody.toString(), User.class);
+				
+				User u=operation.GetUserByPhone(user.getUPhone());
+				
+				if(u == null || !u.getUPassword().equals(user))
+				{
+				  ret.put("retVal", null);
+				  ret.put("status",Long.valueOf(-1));
+				  ret.put("errormsg", "no match user!");
+				}
+				else
+				{
+					
+					ret.put("retVal", u);
+					ret.put("status",Long.valueOf(0));
+					
+					
+					
+				}
+				
+				
+			}
 
 		} catch(Exception e){
 		

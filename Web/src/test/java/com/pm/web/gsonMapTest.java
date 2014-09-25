@@ -1,7 +1,5 @@
 package com.pm.web;
 
-import static org.junit.Assert.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,14 +8,14 @@ import org.junit.Test;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.pm.pojo.UserBase;
+import com.pm.pojo.User;
 
 public class gsonMapTest {
 
 	@Test
 	public void test() {
 
-		UserBase user=new UserBase();
+		User user=new User();
 		user.setUID("12234");
 		user.setUNickname("sasa");
 		Map<String,Object> m=new HashMap<String,Object>();
