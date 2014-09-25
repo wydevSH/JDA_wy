@@ -1,0 +1,45 @@
+1 /repair/getRepairRecord 
+	para: userID , start, offsert
+	ret:Lisr<RepairRecord>
+
+2  /repair/SaveRepairRecord   
+	para: RepairRecord
+	ret:RepairRecord
+
+3  /complaint/getComplaintRecord 
+	para: userID , start, offsert
+	ret:Lisr<Complaint>
+
+4  /complaint/SaveComplaintRecord 
+	para: Complaint
+	ret:Complaint
+
+5   /forum/getRelatedPost
+	para: userID , start, offsert
+	ret:Lisr<Post>
+	
+6   /forum/getPost
+	para: start, offsert
+	ret:Lisr<Post>
+	
+7 	/forum/SavePost
+	para: Post
+	ret:  Post
+	
+8  /User/LoginOn
+    Para: Phone pass
+	ret: User
+	
+9 	/User/SaveUser
+	para: User
+	ret:  User
+
+10 /forum/getNotice
+	para: start, offsert
+	ret:Lisr<Notice>
+	
+
+11 /Message/GetNewMessage
+   para :Time
+   ret : List<Message>
+	
