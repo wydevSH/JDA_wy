@@ -83,7 +83,7 @@ public class RepairTicketDaoImpl implements IRepairTicketDao{
 		return repairtickets ;
 	}
 
-	public RepairTicket selectRepairTicketById(String rid) throws Exception {
+	public RepairTicket GetRepairTicketById(String rid) throws Exception {
 		// TODO Auto-generated method stub
 		RepairTicket repairTicket = null;
 		
@@ -111,7 +111,7 @@ public class RepairTicketDaoImpl implements IRepairTicketDao{
 
 	private boolean IsExsitRepairTicketById(String repairTicketID) throws Exception {
 		// TODO Auto-generated method stub
-		return this.selectRepairTicketById(repairTicketID) != null;
+		return this.GetRepairTicketById(repairTicketID) != null;
 	}
 
 }

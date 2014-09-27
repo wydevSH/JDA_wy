@@ -15,13 +15,13 @@
 	<!-- parameterClass表示参数的内容 -->
 	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
 	<select id="selectRepairTicketById" parameterClass="String" resultClass="RepairTicket">
-		select RepairTicketID,RUserID,RTicketSubject,RTicketContent,RContactTime,RHandler,RHandlerPhone,RResumeTimes,RStatus,RComment,RUpdateTime,RCount from tbl_RepairTicket
+		select RepairTicketID,RUserID,RTicketSubject,RTicketContent,RContactTime,RHandler,RHandlerPhone,RResumeTimes,RStatus,RComment,RUpdateTime from tbl_RepairTicket
 		where RepairTicketID = #RepairTicketID#
 	</select>
 
 
 	<select id="selectRepairTicket" parameterClass="java.util.Map" resultClass="RepairTicket">
-		select	 RepairTicketID,RUserID,RTicketSubject,RTicketContent,RContactTime,RHandler,RHandlerPhone,RResumeTimes,RStatus,RComment,RUpdateTime,RCount from tbl_RepairTicket
+		select	 RepairTicketID,RUserID,RTicketSubject,RTicketContent,RContactTime,RHandler,RHandlerPhone,RResumeTimes,RStatus,RComment,RUpdateTime from tbl_RepairTicket
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="and" property="time_update"> 
 			  RUpdateTime >=#time_pub#
@@ -30,6 +30,7 @@
 			 	 RUserID =#user_id#
 			</isNotNull> 
 		</dynamic>
+		order by RUpdateTime desc
 		 <dynamic prepend=""> 
           	<isNotNull property="_start"> 
                <isNotNull property="_size"> 
@@ -37,14 +38,14 @@
                  </isNotNull> 
             </isNotNull> 
            </dynamic> 
-           order by RUpdateTime desc
+         <!--     -->
 	</select>
 
 
 
 	<insert id="addRepairTicket" parameterClass="RepairTicket">
-		insert into tbl_RepairTicket(RepairTicketID,RUserID,RTicketSubject,RTicketContent,RContactTime,RHandler,RHandlerPhone,RResumeTimes,RStatus,RComment,RUpdateTime,RCount)
-		values(#RepairTicketID#,#RUserID#,#RTicketSubject#,#RTicketContent#,#RContactTime#,#RHandler#,#RHandlerPhone#,#RResumeTimes,#RStatus#,#RComment#,#RUpdateTime#,#RCount#)
+		insert into tbl_RepairTicket(RepairTicketID,RUserID,RTicketSubject,RTicketContent,RContactTime,RHandler,RHandlerPhone,RResumeTimes,RStatus,RComment,RUpdateTime)
+		values(#RepairTicketID#,#RUserID#,#RTicketSubject#,#RTicketContent#,#RContactTime#,#RHandler#,#RHandlerPhone#,#RResumeTimes#,#RStatus#,#RComment#,#RUpdateTime#)
 	</insert>
 
 	<delete id="deleteRepairTicketById" parameterClass="String">
@@ -55,7 +56,7 @@
 
 	<update id="updateRepairTicket" parameterClass="RepairTicket">
 		update tbl_RepairTicket
-		set RepairTicketID=#RepairTicketID#,RUserID=#RUserID#,RTicketSubject=#RTicketSubject#,RTicketContent=#RTicketContent#,RContactTime=#RContactTime#,RHandler=#RHandler#,RHandlerPhone=#RHandlerPhone#,RResumeTimes=#RResumeTimes#,RStatus=#RStatus#,RComment=#RComment#,RUpdateTime=#RUpdateTime#,RCount=#RCount#
+		set RepairTicketID=#RepairTicketID#,RUserID=#RUserID#,RTicketSubject=#RTicketSubject#,RTicketContent=#RTicketContent#,RContactTime=#RContactTime#,RHandler=#RHandler#,RHandlerPhone=#RHandlerPhone#,RResumeTimes=#RResumeTimes#,RStatus=#RStatus#,RComment=#RComment#,RUpdateTime=#RUpdateTime#
 		where RepairTicketID = #RepairTicketID#
 	</update>
 

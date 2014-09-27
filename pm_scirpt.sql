@@ -149,6 +149,23 @@ CREATE TABLE tbl_Comment(
 				CState			int,
 				PRIMARY KEY (CommentID)
 				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+				
+				
+DROP TABLE IF EXISTS tbl_RepairTicket;
+CREATE TABLE tbl_RepairTicket(				
+				RepairTicketID varchar(20),
+				RUserID varchar(20),
+				RTicketSubject varchar(20),
+				RTicketContent	varchar(20),
+				RContactTime date,
+				RHandler varchar(10),
+				RHandlerPhone varchar(10),
+				RResumeTimes int,
+				RStatus varchar(10),
+				RComment  varchar(50),
+				RUpdateTime date,
+				PRIMARY KEY (RepairTicketID)
+				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 				
 

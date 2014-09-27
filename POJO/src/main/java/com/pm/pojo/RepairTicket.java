@@ -1,23 +1,27 @@
 package com.pm.pojo;
 
+import java.util.Date;
+
 public class RepairTicket {
 	String RepairTicketID ;
 	String RUserID			;
 	String RTicketSubject	;
 	String RTicketContent	;
-	String RContactTime	;
+	Date RContactTime	;
 	String RHandler		;
-	String RHanderPhone	;
-	String RResumeTimes	;
+	String RHandlerPhone	;
+	int	   RResumeTimes	;
 	String RStatus			;
 	String RComment			;
-	int    Rcount;
+	Date RUpdateTime	;
 	
-	public int getRcount() {
-		return Rcount;
+	
+
+	public Date getRUpdateTime() {
+		return RUpdateTime;
 	}
-	public void setRcount(int rcount) {
-		Rcount = rcount;
+	public void setRUpdateTime(Date rUpdateTime) {
+		RUpdateTime = rUpdateTime;
 	}
 	public String getRepairTicketID() {
 		return RepairTicketID;
@@ -43,10 +47,10 @@ public class RepairTicket {
 	public void setRTicketContent(String rTicketContent) {
 		RTicketContent = rTicketContent;
 	}
-	public String getRContactTime() {
+	public Date getRContactTime() {
 		return RContactTime;
 	}
-	public void setRContactTime(String rContactTime) {
+	public void setRContactTime(Date rContactTime) {
 		RContactTime = rContactTime;
 	}
 	public String getRHandler() {
@@ -55,16 +59,16 @@ public class RepairTicket {
 	public void setRHandler(String rHandler) {
 		RHandler = rHandler;
 	}
-	public String getRHanderPhone() {
-		return RHanderPhone;
+	public String getRHandlerPhone() {
+		return RHandlerPhone;
 	}
-	public void setRHanderPhone(String rHanderPhone) {
-		RHanderPhone = rHanderPhone;
+	public void setRHandlerPhone(String rHanderPhone) {
+		RHandlerPhone = rHanderPhone;
 	}
-	public String getRResumeTimes() {
+	public int getRResumeTimes() {
 		return RResumeTimes;
 	}
-	public void setRResumeTimes(String rResumeTimes) {
+	public void setRResumeTimes(int rResumeTimes) {
 		RResumeTimes = rResumeTimes;
 	}
 	public String getRStatus() {
