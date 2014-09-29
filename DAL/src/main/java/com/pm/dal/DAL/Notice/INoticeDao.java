@@ -14,8 +14,8 @@ public interface INoticeDao {
 
 	public Notice updateNotice(Notice notice) throws Exception;
 
-	public Notice selectNoticeByID(String UID)throws Exception;
-	public List<Notice> selectNotice(Date time_start, int s,int offset) throws Exception;
+	public Notice GetNoticeByID(String UID)throws Exception;
+	public List<Notice> GetNotice(Date time_start, int s,int offset) throws Exception;
 	
 	public Notice Save(Notice notice)throws Exception;
 

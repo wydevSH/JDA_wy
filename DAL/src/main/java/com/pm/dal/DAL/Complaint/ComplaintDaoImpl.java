@@ -75,7 +75,7 @@ public class ComplaintDaoImpl implements IComplaintDao {
 
 
 
-	public Complaint selectComplaintById(String id) throws SQLException {
+	public Complaint GetComplaintById(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		Complaint complaint = null;
 		
@@ -106,7 +106,7 @@ public class ComplaintDaoImpl implements IComplaintDao {
 	public boolean IsExsitComplaintById(String uid) throws SQLException {
 		// TODO Auto-generated method stub		
 			
-		return this.selectComplaintById(uid)!=null;
+		return this.GetComplaintById(uid)!=null;
 	
 	
 		

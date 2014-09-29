@@ -36,15 +36,14 @@ public class NoticeDaoImpl implements INoticeDao{
 	public Notice addNotice(Notice notice) throws Exception {
 		// TODO Auto-generated method stub
 			
-		    if(notice.getNoticeID() == null ||notice.getNoticeID().equals("")){
+		  
 		    	
-		    	notice.setNoticeID(String.valueOf(System.currentTimeMillis()));
-				sqlMapClient.insert("addNotice", notice);		
+		    	
+		   sqlMapClient.insert("addNotice", notice);		
 		
-				return notice;
-		    }
+			return GetNoticeByID(notice.getNoticeID());
 		    
-		    return null;
+		    
 	}
 
 	public boolean deleteNoticeById(String id) throws SQLException {
@@ -77,7 +76,7 @@ public class NoticeDaoImpl implements INoticeDao{
 
 
 
-	public Notice selectNoticeByID(String id) throws SQLException {
+	public Notice GetNoticeByID(String id) throws SQLException {
 		// TODO Auto-generated method stub
 		Notice notice = null;
 		
@@ -86,7 +85,7 @@ public class NoticeDaoImpl implements INoticeDao{
 		return notice;
 	}
 
-	public List<Notice> selectNotice(Date time_start, int s,int offset) throws SQLException {
+	public List<Notice> GetNotice(Date time_start, int s,int offset) throws SQLException {
 		// TODO Auto-generated method stub
 		List<Notice> notices = null;
 		Map<String,Object> c=new HashMap<String,Object>();
@@ -102,7 +101,7 @@ public class NoticeDaoImpl implements INoticeDao{
 	public boolean IsExsitNoticeById(String uid) throws SQLException {
 		// TODO Auto-generated method stub		
 			
-		return this.selectNoticeByID(uid)!=null;
+		return this.GetNoticeByID(uid)!=null;
 	
 	
 		

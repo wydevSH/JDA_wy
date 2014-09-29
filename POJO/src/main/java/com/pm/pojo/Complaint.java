@@ -1,5 +1,7 @@
 package com.pm.pojo;
 
+import java.sql.Date;
+
 public class Complaint {
 	private String ComplaintID;
 	private String CUserID;
@@ -10,6 +12,14 @@ public class Complaint {
 	private String CHandlerPhone;
 	private int CResumeTimes;
 	private int CStatus;
+	private Date CUpdateTime;
+	
+	public Date getUpdateTime() {
+		return CUpdateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		CUpdateTime = updateTime;
+	}
 	public void setComplaintID(String ComplaintID){
 		this.ComplaintID=ComplaintID;
 	}

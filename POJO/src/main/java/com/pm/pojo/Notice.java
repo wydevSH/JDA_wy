@@ -13,6 +13,14 @@ public class Notice {
 	private String NLabel;
 	private int NIsTop;
 	private int NIsDeleted;
+	private Date UpdateTime;
+	
+	public Date getUpdateTime() {
+		return UpdateTime;
+	}
+	public void setUpdateTime(Date updateTime) {
+		UpdateTime = updateTime;
+	}
 	public void setNoticeID(String NoticeID){
 		this.NoticeID=NoticeID;
 	}

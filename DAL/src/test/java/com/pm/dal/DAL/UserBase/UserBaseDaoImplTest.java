@@ -1,15 +1,38 @@
 package com.pm.dal.DAL.UserBase;
 
+import java.io.IOException;
+import java.io.Reader;
+import java.sql.SQLException;
 import java.util.Date;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import com.ibatis.common.resources.Resources;
+import com.ibatis.sqlmap.client.SqlMapClient;
+import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 import com.pm.pojo.User;
 
 public class UserBaseDaoImplTest extends TestCase {
+	
+	private static  SqlMapClient sqlMapClient = null;
+	
+   @Before
+   protected void setUp() throws IOException, SQLException
+   {
+	   if(sqlMapClient ==null){
+			Reader reader = Resources.getResourceAsReader("com/pm/dal/DAL/SqlMapConfig.xml");
+			sqlMapClient = SqlMapClientBuilder.buildSqlMapClient(reader);
+			reader.close();
+		}
+		
+	   sqlMapClient.delete("deleteUser");
+	   
+   }
+	
 	
 	@Test
 	public void test() throws Exception
@@ -24,6 +47,7 @@ public class UserBaseDaoImplTest extends TestCase {
 		user.setUBirthday(new Date());
 		user.setUGender(0);
 	    User u1 = dao.Save(user);
+	    u1 = dao.Save(u1);
 	    Assert.assertNotNull(u1);
 	    Assert.assertTrue(dao.IsExsitUserByPhone(u1.getUPhone()));
 	    Assert.assertNotNull(dao.selectUserById(u1.getUID()));

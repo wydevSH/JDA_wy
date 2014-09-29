@@ -15,48 +15,50 @@
 	<!-- parameterClass表示参数的内容 -->
 	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
 	<select id="selectComplaintById" parameterClass="String" resultClass="Complaint">
-	select ComplaintID,CUserID,CTicketSubject,CTicketContent,CContactTimeType,CHandler,CHandlerPhone,CResumeTimes,CStatus,RUpdateTime from tbl_complaint
-	where ComplaintID = #id#
+	select ComplaintID,CUserID,CTicketSubject,CTicketContent,CContactTimeType,CHandler,CHandlerPhone,CResumeTimes,CStatus,CUpdateTime from tbl_complaint
+	where ComplaintID = #ComplaintID#
 	</select>
 
 
 	<select id="selectComplaint" parameterClass="java.util.Map" resultClass="Complaint">
-		select ComplaintID,CUserID,CTicketSubject,CTicketContent,CContactTimeType,CHandler,CHandlerPhone,CResumeTimes,CStatus,RUpdateTime from tbl_complaint
+		select ComplaintID,CUserID,CTicketSubject,CTicketContent,CContactTimeType,CHandler,CHandlerPhone,CResumeTimes,CStatus,CUpdateTime from tbl_complaint
 		<dynamic prepend="WHERE">
-			<isNotNull prepend="and" property="time_update"> 
-			  RUpdateTime >=#time_pub#
+			<isNotNull prepend="and" property="Min"> 
+			  CUpdateTime >=#Min#
+			</isNotNull> 
+			<isNotNull prepend="and" property="Max"> 
+			 #Max#>= CUpdateTime 
 			</isNotNull> 
 			<isNotNull prepend="and" property="user_id"> 
 			 	 CUserID =#user_id#
 			</isNotNull> 
 		</dynamic>
+		 order by CUpdateTime desc
 		 <dynamic prepend=""> 
-          	<isNotNull property="_start"> 
                <isNotNull property="_size"> 
-                 	limit #_start#, #_size# 
-                 </isNotNull> 
-            </isNotNull> 
+                 	limit  #_size# 
+                 </isNotNull>  
            </dynamic> 
-           order by RUpdateTime desc
+          
 	</select>
 
 
 
 	<insert id="addComplaint" parameterClass="Complaint">
-		insert into tbl_complaint(ComplaintID,CUserID,CTicketSubject,CTicketContent,CContactTimeType,CHandler,CHandlerPhone,CResumeTimes,CStatus,RUpdateTime)
-		values(#CUserID#,#CTicketSubject#,#CTicketContent#,#CContactTimeType#,#CHandler#,#CHandlerPhone#,#CResumeTimes#,#CStatus#,#RUpdateTime#)
+		insert into tbl_complaint(ComplaintID,CUserID,CTicketSubject,CTicketContent,CContactTimeType,CHandler,CHandlerPhone,CResumeTimes,CStatus,CUpdateTime)
+		values(#ComplaintID#,#CUserID#,#CTicketSubject#,#CTicketContent#,#CContactTimeType#,#CHandler#,#CHandlerPhone#,#CResumeTimes#,#CStatus#,#CUpdateTime#)
 	</insert>
 
 	<delete id="deleteComplaintById" parameterClass="String">
 		<!-- #id#里的id可以随意取，但是上面的insert则会有影响，因为上面的name会从Student里的属性里去查找 -->
 		<!-- 我们也可以这样理解，如果有#占位符，则ibatis会调用parameterClass里的属性去赋值 -->
-		delete from tbl_complaint where ComplaintID = #id#
+		delete from tbl_complaint where ComplaintID = #ComplaintID#
 	</delete>
 
 	<update id="updateComplaint" parameterClass="Complaint">
 		update tbl_complaint
-		set CUserID = #CUserID#,CTicketSubject = #CTicketSubject#,CTicketContent = #CTicketContent#,CContactTimeType = #CContactTimeType#,CHandler = #CHandler#,CHandlerPhone = #CHandlerPhone#,CResumeTimes = #CResumeTimes#,CStatus = #CStatus#,RUpdateTime=#RUpdateTime#
-		where ComplaintID = #id#
+		set CUserID = #CUserID#,CTicketSubject = #CTicketSubject#,CTicketContent = #CTicketContent#,CContactTimeType = #CContactTimeType#,CHandler = #CHandler#,CHandlerPhone = #CHandlerPhone#,CResumeTimes = #CResumeTimes#,CStatus = #CStatus#,CUpdateTime=#CUpdateTime#
+		where ComplaintID = #ComplaintID#
 	</update>
 
 </sqlMap>

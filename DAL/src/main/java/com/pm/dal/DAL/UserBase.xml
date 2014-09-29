@@ -36,9 +36,14 @@
 		delete from tbl_user where UID=#UID#
 	</delete>
 
+	<delete id="deleteUser" >
+		<!-- #id#里的id可以随意取，但是上面的insert则会有影响，因为上面的name会从Student里的属性里去查找 -->
+		<!-- 我们也可以这样理解，如果有#占位符，则ibatis会调用parameterClass里的属性去赋值 -->
+		delete from tbl_user 
+	</delete>
+	
 	<update id="updateUser" parameterClass="User">
-		update tbl_user set
-		UNickname=#UNickname#,UPhone=#UPhone#,UPassword=#UPassword#,URole=#URole#,URegTime=#URegTime#,URealName = #URealName#,UGender = #UGender#,UBirthday = #UBirthday#,UProfession = #UProfession#,UBuilding = #UBuilding#,URoom = #URoom#,UFamilyNO = #UFamilyNO#,UQQNum = #UQQNum#,UCarNums = #UCarNums# where UID=#UID#
+		update tbl_user set UNickname=#UNickname#,UPhone=#UPhone#,UPassword=#UPassword#,URole=#URole#,URegTime=#URegTime#,URealName = #URealName#,UGender = #UGender#,UBirthday = #UBirthday#,UProfession = #UProfession#,UBuilding = #UBuilding#,URoom = #URoom#,UFamilyNO = #UFamilyNO#,UQQNum = #UQQNum#,UCarNums = #UCarNums# where UID=#UID#
 	</update>
 
 </sqlMap>

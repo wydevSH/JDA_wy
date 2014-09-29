@@ -34,7 +34,7 @@ public class RepairTicketDaoImpl implements IRepairTicketDao{
 	public RepairTicket addRepairTicket(RepairTicket repairticket)
 			throws Exception {
 	
-		repairticket.setRepairTicketID(String.valueOf(System.currentTimeMillis()));
+		
 		sqlMapClient.insert("addRepairTicket", repairticket);		
 	
 		return repairticket;

@@ -63,7 +63,7 @@ public class RepairTicketDaoImplTest {
 		impl.Save(ticket4);
 		
 		List<RepairTicket>  l=impl.GetRepairTicketByUserId(null, null, 1, 10);
-		 Assert.assertEquals(l.size(), 10);
+		 Assert.assertEquals(l.size(), 4);
 		 ticket.setRUserID("114");
 		 impl.Save(ticket);
 		 List<RepairTicket>  l2=impl.GetRepairTicketByUserId("114", null, 0, 10);

@@ -15,17 +15,18 @@
 	<!-- parameterClass表示参数的内容 -->
 	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
 	<select id="selectNoticeById" parameterClass="String" resultClass="Notice">
-		select NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted from tbl_notice
+		select NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted from tbl_Notice
 		where NoticeID = #id#
 	</select>
 
 	<select id="selectNotice" parameterClass="java.util.Map" resultClass="Notice">
-		select NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted from tbl_notice
+		select NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted from tbl_Notice
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="and" property="time_pub"> 
 			  NPubTime >=#time_pub#
 			</isNotNull> 
 		</dynamic>
+		order by NPubTime desc
 		 <dynamic prepend=""> 
           	<isNotNull property="_start"> 
                <isNotNull property="_size"> 
@@ -33,26 +34,32 @@
                  </isNotNull> 
             </isNotNull> 
            </dynamic> 
-           order by NPubTime desc
+           
 	</select>
 
 
 
 	<insert id="addNotice" parameterClass="Notice">
-	insert into tbl_notice(NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted)
-	values(#NBiotopeID#,#NPoster#,#NPubTime#,#NExpTime#,#NSubject#,#NContent#,#NLabel#,#NIsTop#,#NIsDeleted#)
+	insert into tbl_Notice(NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted,UpdateTime)
+	values(#NoticeID#,#NBiotopeID#,#NPoster#,#NPubTime#,#NExpTime#,#NSubject#,#NContent#,#NLabel#,#NIsTop#,#NIsDeleted#,#UpdateTime#)
 	</insert>
 
 	<delete id="deleteNoticeById" parameterClass="String">
 		<!-- #id#里的id可以随意取，但是上面的insert则会有影响，因为上面的name会从Student里的属性里去查找 -->
 		<!-- 我们也可以这样理解，如果有#占位符，则ibatis会调用parameterClass里的属性去赋值 -->
-		delete from tbl_notice where NoticeID = #id#
+		delete from tbl_Notice where NoticeID = #id#
+	</delete>
+
+	<delete id="deleteNotice" >
+		<!-- #id#里的id可以随意取，但是上面的insert则会有影响，因为上面的name会从Student里的属性里去查找 -->
+		<!-- 我们也可以这样理解，如果有#占位符，则ibatis会调用parameterClass里的属性去赋值 -->
+		delete from tbl_Notice 
 	</delete>
 
 	<update id="updateNotice" parameterClass="Notice">
-		update tbl_notice
-		set NBiotopeID = #NBiotopeID#,NPoster = #NPoster#,NPubTime = #NPubTime#,NExpTime = #NExpTime#,NSubject = #NSubject#,NContent = #NContent#,NLabel = #NLabel#,NIsTop = #NIsTop#,NIsDeleted = #NIsDeleted#
-		where NoticeID = #id#
+		update tbl_Notice
+		set NoticeID = #NoticeID#,NBiotopeID = #NBiotopeID#,NPoster = #NPoster#,NPubTime = #NPubTime#,NExpTime = #NExpTime#,NSubject = #NSubject#,NContent = #NContent#,NLabel = #NLabel#,NIsTop = #NIsTop#,NIsDeleted = #NIsDeleted#,UpdateTime=#UpdateTime#
+		where NoticeID = #NoticeID#
 	</update>
 
 </sqlMap>

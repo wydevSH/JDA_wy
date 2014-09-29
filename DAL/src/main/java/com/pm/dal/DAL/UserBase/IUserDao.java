@@ -13,7 +13,7 @@ public interface IUserDao {
 
 	public boolean IsExsitUserByPhone(String Phone)throws Exception;
 
-	public boolean updateUser(User user) throws Exception;
+	public User updateUser(User user) throws Exception;
 
 
 	public User selectUserByPhone(String phone)throws Exception;

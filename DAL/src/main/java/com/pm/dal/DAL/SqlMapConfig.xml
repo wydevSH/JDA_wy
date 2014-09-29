@@ -18,4 +18,6 @@
 	<!-- 这里可以写多个实体的映射文件 -->
 	  <sqlMap resource="com/pm/dal/DAL/UserBase.xml" />
 	  <sqlMap resource="com/pm/dal/DAL/RepairTicket.xml" />
+	   <sqlMap resource="com/pm/dal/DAL/Notice.xml" />
+	    <sqlMap resource="com/pm/dal/DAL/Complaint.xml" />
 </sqlMapConfig>

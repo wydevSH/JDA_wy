@@ -17,6 +17,7 @@ CREATE TABLE tbl_user(
 					UFamilyNO		int 		DEFAULT 0,
 					UQQNum		varchar(20) DEFAULT	'',
 					UCarNums		varchar(20) DEFAULT	'',
+					UpdateTime		date      NOT NULL,
 					PRIMARY KEY (UID)
 					)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 					
@@ -79,11 +80,11 @@ CREATE TABLE tbl_RepairTicket(
 				
 DROP TABLE IF EXISTS tbl_Complaint;
 CREATE TABLE tbl_Complaint(				
-				ComplaintID			varchar(10) NOT NULL,
+				ComplaintID			varchar(20) NOT NULL,
 				CUserID				varchar(10) NOT NULL,
-				CTicketSubject		varchar(10) NOT NULL,
-				CTicketContent		varchar(10) NOT NULL,
-				CContactTimeType	int		    NOT NULL,
+				CTicketSubject		varchar(20) default 'none',
+				CTicketContent		varchar(50) default 'none',
+				CContactTimeType	int		    default 0,
 				CHandler			varchar(10),
 				CHandlerPhone		varchar(10),
 				CResumeTimes		int,
@@ -108,16 +109,17 @@ CREATE TABLE tbl_PFEE(
 				
 DROP TABLE IF EXISTS tbl_Notice;
 CREATE TABLE tbl_Notice(				
-				NoticeID		varchar(10) NOT NULL,
+				NoticeID		varchar(20) NOT NULL,
 				NBiotopeID		varchar(10) NOT NULL,
 				NPoster			varchar(10) NOT NULL,
 				NPubTime		date,
 				NExpTime		date,
-				NSubject		varchar(10) NOT NULL,
-				NContent		varchar(100) NOT NULL,
-				NLabel			varchar(20) NOT NULL,
+				NSubject		varchar(10) default 'none',
+				NContent		varchar(100) default 'none',
+				NLabel			varchar(20) default 'none',
 				NIsTop			int,
 				NIsDeleted		int,
+				UpdateTime		date      ,
 				PRIMARY KEY (NoticeID)
 				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 				
