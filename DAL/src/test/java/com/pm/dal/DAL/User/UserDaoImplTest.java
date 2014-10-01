@@ -1,4 +1,4 @@
-package com.pm.dal.DAL.UserBase;
+package com.pm.dal.DAL.User;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import com.pm.pojo.User;
 
-public class UserBaseDaoImplTest extends TestCase {
+public class UserDaoImplTest extends TestCase {
 	
 	@Test
 	public void test() throws Exception

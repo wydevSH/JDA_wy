@@ -2,54 +2,54 @@ package com.pm.bll.beans;
 
 import java.io.IOException;
 
-import com.pm.bll.interfaces.IUserBaseOperation;
-import com.pm.dal.DAL.UserBase.IUserBaseDao;
-import com.pm.dal.DAL.UserBase.UserBaseDaoImpl;
-import com.pm.pojo.UserBase;
+import com.pm.bll.interfaces.IUserOperation;
+import com.pm.dal.DAL.User.IUserDao;
+import com.pm.dal.DAL.User.UserDaoImpl;
+import com.pm.pojo.User;
 
 
-public class UserBean implements IUserBaseOperation {
+public class UserBean implements IUserOperation {
 
 
-	protected  IUserBaseDao usrbasedao = null;
+	protected  IUserDao userdao = null;
 
 	public UserBean() throws IOException{
-		this.usrbasedao=new UserBaseDaoImpl();
+		this.userdao=new UserDaoImpl();
 
 	}
 	
 	
-	public IUserBaseDao getUsrbasedao() {
-		return usrbasedao;
+	public IUserDao getUserbasedao() {
+		return userdao;
 	}
 
-	public void setUsrbasedao(IUserBaseDao usrbasedao) {
-		this.usrbasedao = usrbasedao;
+	public void setUserdao(IUserDao userdao) {
+		this.userdao = userdao;
 	}
 
 
-	public UserBase GetUserByID(String ID) throws Exception {
+	public User GetUserByID(String ID) throws Exception {
 		// TODO Auto-generated method stub
 		
 		
-		return usrbasedao.selectUserBaseById(ID);
+		return userdao.selectUserById(ID);
 	}
 
-	public UserBase GetUserByPhone(String phone) throws Exception {
+	public User GetUserByPhone(String phone) throws Exception {
 		// TODO Auto-generated method stub
-		return usrbasedao.selectUserBaseByPhone(phone);
+		return userdao.selectUserByPhone(phone);
 	}
 
 	public Boolean deleteUserByID(String ID) throws Exception {
 		// TODO Auto-generated method stub
-		return usrbasedao.deleteUserBaseById(ID);
+		return userdao.deleteUserById(ID);
 	}
 
 
 
-	public UserBase Save(UserBase user) throws Exception {
+	public User Save(User user) throws Exception {
 		// TODO Auto-generated method stub
-		return usrbasedao.Save(user);
+		return userdao.Save(user);
 	}
 
 

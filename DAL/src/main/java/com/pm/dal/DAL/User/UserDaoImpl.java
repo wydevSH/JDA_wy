@@ -1,4 +1,4 @@
-package com.pm.dal.DAL.UserBase;
+package com.pm.dal.DAL.User;
 
 import java.io.IOException;
 import java.io.Reader;

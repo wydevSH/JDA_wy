@@ -1,4 +1,4 @@
-package com.pm.dal.DAL.UserBase;
+package com.pm.dal.DAL.User;
 
 import com.pm.pojo.User;
 
