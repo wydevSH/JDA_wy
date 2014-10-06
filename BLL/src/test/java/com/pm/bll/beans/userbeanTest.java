@@ -18,8 +18,8 @@ public class userbeanTest {
 		UserBean bean=new UserBean();
 		User user=new User();
     	
-		user.setUPhone("112345");
-		user.setUPassword("11234");
+		user.setUPhone("1123456");
+		user.setUPassword("112346");
 		user.setURegTime(new Date());
 		User user1=bean.Save(user);
 		Assert.assertNotNull(user1);

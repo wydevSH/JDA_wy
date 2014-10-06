@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.423" errors="0" skipped="0" tests="1" name="com.pm.bll.beans.userbeanTest">
+<testsuite failures="0" time="0.076" errors="0" skipped="0" tests="1" name="com.pm.bll.beans.userbeanTest">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\jdk7\jre\bin"/>
@@ -26,7 +26,7 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
     <property name="os.name" value="Windows 7"/>
-    <property name="classworlds.conf" value="C:\Users\Ansin\workspace2\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf6660323252860458475.tmp"/>
+    <property name="classworlds.conf" value="C:\Users\Ansin\workspace2\.metadata\.plugins\org.eclipse.m2e.launching\launches\m2conf2449248670640527990.tmp"/>
     <property name="sun.jnu.encoding" value="GBK"/>
     <property name="java.library.path" value="C:\jdk7\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/jdk7/bin/../jre/bin/client;C:/jdk7/bin/../jre/bin;C:/jdk7/bin/../jre/lib/i386;C:\jdk7\bin;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x86;C:\Program Files (x86)\Intel\OpenCL SDK\3.0\bin\x64;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files\Lenovo\Fingerprint Manager Pro\;C:\Program Files (x86)\MySQL\MySQL Server 5.5\bin;C:\apache-maven-3.2.3\bin;C:\Program Files\TortoiseSVN\bin;C:\Program Files (x86)\Git\bin;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;D:\JDA_work\JDA_Software\eclipse;;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -61,5 +61,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase time="0.423" classname="com.pm.bll.beans.userbeanTest" name="test"/>
+  <testcase time="0.076" classname="com.pm.bll.beans.userbeanTest" name="test"/>
 </testsuite>

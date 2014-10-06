@@ -3,6 +3,8 @@ package com.pm.dal.DAL.Notice;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -35,7 +37,7 @@ public class NoticeDaoImpl implements INoticeDao{
 	public Notice addNotice(Notice notice) throws Exception {
 		// TODO Auto-generated method stub
 			
-		    if(notice.getNoticeID() == null ||notice.getNoticeID().equals("")){
+		    if(notice.getNBiotopeID() != null ||  !(notice.getNBiotopeID().equals(""))){
 		    	
 		    	notice.setNoticeID(String.valueOf(System.currentTimeMillis()));
 				sqlMapClient.insert("addNotice", notice);		
@@ -98,6 +100,16 @@ public class NoticeDaoImpl implements INoticeDao{
 		return notices;
 	}
 	
+		
+	public ArrayList<Notice> selectNoticeByBiotopeID(String biotopeID) throws SQLException {
+		// TODO Auto-generated method stub
+		ArrayList<Notice> noticeList = new ArrayList<Notice>();
+		
+		noticeList = (ArrayList) sqlMapClient.queryForObject("selectNoticeByBiotopeId",biotopeID);
+		
+		return noticeList;
+	}
+	
 	public boolean IsExsitNoticeById(String uid) throws SQLException {
 		// TODO Auto-generated method stub		
 			
@@ -110,22 +122,20 @@ public class NoticeDaoImpl implements INoticeDao{
 	
 	public Notice Save(Notice notice) throws Exception {
 		
-		if(notice.getNoticeID()==null ||notice.getNoticeID().equals(""))
-		{			
-			return this.addNotice(notice);			
-		}
+	if(notice.getNoticeID()==null || notice.getNoticeID().equals("")){
 		
-		if(IsExsitNoticeById(notice.getNoticeID())){
-			return this.updateNotice(notice);
-		}
-		
-		return null;
-	
+	    if(notice.getNBiotopeID()==null || notice.getNBiotopeID().equals(""))
+	    	return null;
+		 notice.setNoticeID(String.valueOf(Calendar.getInstance().getTimeInMillis()));
+		 System.out.print(notice.getNoticeID());
+		 return this.addNotice(notice);
 	}
+	else{
+		if(IsExsitNoticeById(notice.getNoticeID()))
+			System.out.print(notice.getNoticeID());
+			return this.updateNotice(notice);
+		    
+	    }
 
-
-
-
-
-
+    }
 }
