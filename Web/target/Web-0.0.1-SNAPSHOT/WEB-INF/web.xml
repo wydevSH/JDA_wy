@@ -6,6 +6,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>UserService</servlet-name>
-    <url-pattern>/adduser</url-pattern>
+    <url-pattern>/*</url-pattern>
   </servlet-mapping>
 </web-app>
