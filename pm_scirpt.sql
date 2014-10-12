@@ -17,7 +17,6 @@ CREATE TABLE tbl_user(
 					UFamilyNO		int 		DEFAULT 0,
 					UQQNum		varchar(20) DEFAULT	'',
 					UCarNums		varchar(20) DEFAULT	'',
-					UpdateTime		date      NOT NULL,
 					PRIMARY KEY (UID)
 					)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 					
@@ -127,19 +126,32 @@ CREATE TABLE tbl_Notice(
 
 DROP TABLE IF EXISTS tbl_Post;
 CREATE TABLE tbl_Post(
-				PostID			varchar(10) NOT NULL,
-				PUserID			varchar(10) NOT NULL,
+				PostID			varchar(20) NOT NULL,
+				PPhone		    varchar(10) NOT NULL,
 				PSubmitTime		date,
 				PIsVadilated	int,
 				PSubject		varchar(10) NOT NULL,
 				PBodyText		varchar(100) NOT NULL,
-				PReplyNum		int,
-				PClickNum		int,
 				PState			int,
-				PLastReplierID	varchar(10) NOT NULL,
-				PLastRepTime	date,
+				PRootID			varchar(10) NOT NULL,
+				PReplyPostID	varchar(10) NOT NULL,
+				PUpdateTime	date,
 				PRIMARY KEY (PostID)
 				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+				
+				
+				
+DROP TABLE IF EXISTS tbl_PostTitle;
+CREATE TABLE tbl_PostTitle(
+				PostID			varchar(20) NOT NULL,
+				PPhone		    varchar(10) NOT NULL,
+				PSubmitTime		date,
+				PIsVadilated	int,
+				PSubject		varchar(10) NOT NULL,				
+				PState			int,
+				PLastUpdateTime	date,
+				PRIMARY KEY (PostID)
+				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;				
 
 DROP TABLE IF EXISTS tbl_Comment;
 CREATE TABLE tbl_Comment(

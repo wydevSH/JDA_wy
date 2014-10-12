@@ -15,33 +15,33 @@
 	<!-- parameterClass表示参数的内容 -->
 	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
 	<select id="selectNoticeById" parameterClass="String" resultClass="Notice">
-		select NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted from tbl_Notice
+		select NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted,UpdateTime from tbl_Notice
 		where NoticeID = #id#
 	</select>
 
 	<select id="selectNotice" parameterClass="java.util.Map" resultClass="Notice">
-		select NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted from tbl_Notice
+		select NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted,UpdateTime from tbl_Notice
 		<dynamic prepend="WHERE">
-			<isNotNull prepend="and" property="time_pub"> 
-			  NPubTime >=#time_pub#
+			<isNotNull prepend="and" property="min"> 
+			  UpdateTime >= #min#
 			</isNotNull> 
+			<isNotNull prepend="and" property="max"> 
+			  #max# >= UpdateTime 
+			</isNotNull> 	
 		</dynamic>
-		order by NPubTime desc
-		 <dynamic prepend=""> 
-          	<isNotNull property="_start"> 
+			order by UpdateTime desc
+		 <dynamic prepend="">          	
                <isNotNull property="_size"> 
-                 	limit #_start#, #_size# 
-                 </isNotNull> 
-            </isNotNull> 
+                 	limit #_size# 
+                 </isNotNull>   
            </dynamic> 
-           
 	</select>
 
 
 
 	<insert id="addNotice" parameterClass="Notice">
 	insert into tbl_Notice(NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted,UpdateTime)
-	values(#NoticeID#,#NBiotopeID#,#NPoster#,#NPubTime#,#NExpTime#,#NSubject#,#NContent#,#NLabel#,#NIsTop#,#NIsDeleted#,#UpdateTime#)
+	values(#NoticeID#,#NBiotopeID#,#NPoster#,#NPubTime#,#NExpTime#,#NSubject#,#NContent#,#NLabel#,#NIsTop#,#NIsDeleted#,#NUpdateTime#)
 	</insert>
 
 	<delete id="deleteNoticeById" parameterClass="String">
@@ -58,7 +58,7 @@
 
 	<update id="updateNotice" parameterClass="Notice">
 		update tbl_Notice
-		set NoticeID = #NoticeID#,NBiotopeID = #NBiotopeID#,NPoster = #NPoster#,NPubTime = #NPubTime#,NExpTime = #NExpTime#,NSubject = #NSubject#,NContent = #NContent#,NLabel = #NLabel#,NIsTop = #NIsTop#,NIsDeleted = #NIsDeleted#,UpdateTime=#UpdateTime#
+		set NoticeID = #NoticeID#,NBiotopeID = #NBiotopeID#,NPoster = #NPoster#,NPubTime = #NPubTime#,NExpTime = #NExpTime#,NSubject = #NSubject#,NContent = #NContent#,NLabel = #NLabel#,NIsTop = #NIsTop#,NIsDeleted =#NIsDeleted#,UpdateTime=#NUpdateTime#
 		where NoticeID = #NoticeID#
 	</update>
 

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+   "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<!-- 通过typeAlias使得我们在下面使用Student实体类的时候不需要写包名 -->
+	<typeAlias alias="PostTitle" type="com.pm.pojo.PostTitle" />
+
+	<!-- 这样以后改了sql，就不需要去改java代码了 -->
+	<!-- id表示select里的sql语句，resultClass表示返回结果的类型 -->
+	<select id="selectAllPostTitle" resultClass="PostTitle">
+		select * from tbl_PostTitle
+	</select>
+
+	<!-- parameterClass表示参数的内容 -->
+	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
+	<select id="selectPostTitleById" parameterClass="String" resultClass="PostTitle">
+		select  PostID,  PPhone, PSubmitTime,PIsVadilated,PSubject,PState,PLastUpdateTime
+		from tbl_PostTitle
+		where PostID = #id#
+	</select>
+
+	<select id="selectPostTitlebyTimeRange" parameterClass="java.util.Map" resultClass="PostTitle">
+		select PostID,  PPhone, PSubmitTime,PIsVadilated,PSubject,PState,PLastUpdateTime
+		from tbl_PostTitle
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="and" property="Min"> 
+			  PLastUpdateTime >=#Min#
+			</isNotNull> 
+			<isNotNull prepend="and" property="Max"> 
+			  #Max# >= PLastUpdateTime 
+			</isNotNull> 
+		</dynamic>
+		order by PLastUpdateTime desc
+		 <dynamic prepend="">          	
+               <isNotNull property="_size"> 
+                 	limit #_size# 
+                 </isNotNull>   
+           </dynamic> 
+	</select>
+
+
+
+
+
+	<insert id="addPostTitle" parameterClass="PostTitle">
+		insert into tbl_PostTitle( PostID,  PPhone, PSubmitTime,PIsVadilated,PSubject,PState,PLastUpdateTime)
+		values( #PostID#,  #PPhone#, #PSubmitTime#,#PIsVadilated#,#PSubject#,#PState#,#PLastUpdateTime#	)
+	</insert>
+
+
+
+	<delete id="deletePostTitleById" parameterClass="String">
+		<!-- #id#里的id可以随意取，但是上面的insert则会有影响，因为上面的name会从Student里的属性里去查找 -->
+		<!-- 我们也可以这样理解，如果有#占位符，则ibatis会调用parameterClass里的属性去赋值 -->
+		delete from tbl_PostTitle
+		where PostTitleID = #id#
+
+	</delete>
+
+	<update id="updatePostTitle" parameterClass="PostTitle">
+		update tbl_PostTitle
+		set PostID=#PostID#,  PPhone=#PPhone#, PSubmitTime=#PSubmitTime#,PIsVadilated=#PIsVadilated#,PSubject=#PSubject#,PState=#PState#,,PLastUpdateTime=#PLastUpdateTime#
+		where PostTitleID = #PostTitleID#
+	</update>
+
+</sqlMap>

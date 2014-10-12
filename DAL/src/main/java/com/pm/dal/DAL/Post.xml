@@ -15,15 +15,43 @@
 	<!-- parameterClass表示参数的内容 -->
 	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
 	<select id="selectPostById" parameterClass="String" resultClass="Post">
-		select PostID,PUserID,PSubmitTime,PIsVadilated,PSubject,PBodyText,PReplyNum,PClickNum,PState,PLastReplierID,PLastRepTime
+		select PostID,PPhone,PSubmitTime,PIsVadilated,PSubject,PBodyText,PState,PRootID,PReplyPostID,PUpdateTime
 		from tbl_post
 		where PostID = #id#
 	</select>
 
+	<select id="selectPostbyTimeRangeAndPhone" parameterClass="java.util.Map" resultClass="Post">
+		select PostID,PPhone,PSubmitTime,PIsVadilated,PSubject,PBodyText,PState,PRootID,PReplyPostID,PUpdateTime
+		from tbl_post
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="and" property="Min"> 
+			  PUpdateTime >=#Min#
+			</isNotNull> 
+			<isNotNull prepend="and" property="Max"> 
+			  #Max# >= PUpdateTime 
+			</isNotNull> 
+			<isNotNull prepend="and" property="user_id"> 
+			 	 RUserID =#user_id#
+			</isNotNull> 
+		</dynamic>
+		order by PUpdateTime desc
+		 <dynamic prepend="">          	
+               <isNotNull property="_size"> 
+                 	limit #_size# 
+                 </isNotNull>   
+           </dynamic> 
+	</select>
+
+
+
+
+
 	<insert id="addPost" parameterClass="Post">
-		insert into tbl_post(PostID,PUserID,PSubmitTime,PIsVadilated,PSubject,PBodyText,PReplyNum,PClickNum,PState,PLastReplierID,PLastRepTime)
-		values(#PUserID#,#PSubmitTime#,#PIsVadilated#,#PSubject#,#PBodyText#,#PReplyNum#,#PClickNum#,#PState#,#PLastReplierID#,#PLastRepTime#)
+		insert into tbl_post(PostID,PPhone,PSubmitTime,PIsVadilated,PSubject,PBodyText,PState,PRootID,PReplyPostID,PUpdateTime)
+		values(#PostID#, #PPhone#,#PSubmitTime#,#PIsVadilated#,#PSubject#,#PBodyText#,#PState#,#PRootID#,#PReplyPostID#,#PUpdateTime#)
 	</insert>
+
+
 
 	<delete id="deletePostById" parameterClass="String">
 		<!-- #id#里的id可以随意取，但是上面的insert则会有影响，因为上面的name会从Student里的属性里去查找 -->
@@ -35,8 +63,8 @@
 
 	<update id="updatePost" parameterClass="Post">
 		update tbl_post
-		set PUserID = #PUserID#,PSubmitTime = #PSubmitTime#,PIsVadilated = #PIsVadilated#,PSubject = #PSubject#,PBodyText = #PBodyText#,PReplyNum = #PReplyNum#,PClickNum = #PClickNum#,PState = #PState#,PLastReplierID = #PLastReplierID#,PLastRepTime = #PLastRepTime#
-		where PostID = #id#
+		set PostID=#PostID#,PPhone=#PPhone#,PSubmitTime=#PSubmitTime#,PIsVadilated=#PIsVadilated#,PSubject=#PSubject#,PBodyText=#PBodyText#,PState=#PState#,PRootID=#PRootID#,PReplyPostID=#PReplyPostID#,PUpdateTime=#PUpdateTime#
+		where PostID = #PostID#
 	</update>
 
 </sqlMap>
