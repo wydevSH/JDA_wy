@@ -31,8 +31,7 @@ CREATE TABLE tbl_Biotope(
 					BAddress			varchar(30) ,
 					BBeginYear		date		,
 					PRIMARY KEY (BiotopeID)
-					)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-					
+					)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;					
 					
 DROP TABLE IF EXISTS tbl_Property;
 CREATE TABLE tbl_Property(
@@ -59,10 +58,10 @@ CREATE TABLE tbl_PAdmin(
 				
 DROP TABLE IF EXISTS tbl_RepairTicket;
 CREATE TABLE tbl_RepairTicket(					
-				RepairTicketID	varchar(10) NOT NULL,
+				RepairTicketID	varchar(20 ) NOT NULL,
 				RUserID			varchar(20) NOT NULL,
 				RTicketSubject	varchar(50) NOT NULL,
-				RTicketContent	varchar(300) NOT NULL,
+				RTicketContent	varchar(140) NOT NULL,
 				RContactTime	date,		
 				RHandler		varchar(20) NOT NULL,
 				RHanderPhone	varchar(15) NOT NULL,
@@ -72,26 +71,22 @@ CREATE TABLE tbl_RepairTicket(
 				RUpdateTime		date,
 				RCount          int,
 				PRIMARY KEY (RepairTicketID)
-				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-				
-				
+				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;				
 				
 DROP TABLE IF EXISTS tbl_Complaint;
 CREATE TABLE tbl_Complaint(				
-				ComplaintID			varchar(10) NOT NULL,
+				ComplaintID			varchar(20) NOT NULL,
 				CUserID				varchar(20) NOT NULL,
-				CTicketSubject		varchar(50) NOT NULL,
-				CTicketContent		varchar(300) NOT NULL,
-				CContactTimeType	int		    NOT NULL,
+				CTicketSubject		varchar(50) default 'none',
+				CTicketContent		varchar(140) default 'none',
+				CContactTimeType	int		     default 0,
 				CHandler			varchar(20),
 				CHandlerPhone		varchar(15),
 				CResumeTimes		int,
 				CStatus				int			NOT	NULL  DEFAULT 0,
 				CUpdateTime			date,
 				PRIMARY KEY (ComplaintID)
-				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-				
-				
+				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;				
 				
 DROP TABLE IF EXISTS tbl_PFEE;
 CREATE TABLE tbl_PFEE(				
@@ -102,8 +97,7 @@ CREATE TABLE tbl_PFEE(
 				FPaidDate		date,
 				FComments		varchar(100),
 				PRIMARY KEY (PMFeeID)
-				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-				
+				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;				
 				
 DROP TABLE IF EXISTS tbl_Notice;
 CREATE TABLE tbl_Notice(				
@@ -112,46 +106,37 @@ CREATE TABLE tbl_Notice(
 				NPoster			varchar(20) NOT NULL,
 				NPubTime		date,
 				NExpTime		date,
-				NSubject		varchar(50) NOT NULL,
-				NContent		varchar(800) NOT NULL,
-				NLabel			varchar(50) NOT NULL,
+				NSubject		varchar(50) default 'none',
+				NContent		varchar(400) default 'none',
+				NLabel			varchar(50) default 'none',
 				NIsTop			int,
 				NIsDeleted		int,
+				UpdateTime		date      ,
 				PRIMARY KEY (NoticeID)
-				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-				
-				
+				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;				
 
 DROP TABLE IF EXISTS tbl_Post;
 CREATE TABLE tbl_Post(
-				PostID			varchar(10) NOT NULL,
-				PUserID			varchar(20) NOT NULL,
+				PostID			varchar(20) NOT NULL,
+				PPhone			varchar(20) NOT NULL,
 				PSubmitTime		date,
 				PIsVadilated	int,
 				PSubject		varchar(50) NOT NULL,
 				PBodyText		varchar(300) NOT NULL,
-				PReplyNum		int,
-				PClickNum		int,
 				PState			int,
 				PLastReplierID	varchar(20) NOT NULL,
 				PLastRepTime	date,
 				PRIMARY KEY (PostID)
 				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
-DROP TABLE IF EXISTS tbl_Comment;
-CREATE TABLE tbl_Comment(
-				CommentID		varchar(300) NOT NULL,
-				CMainPostID		varchar(20) NOT NULL,
-				CUserID			varchar(20) NOT NULL,
-				CReplyCont		int,
-				CReplyTime		int,
-				CState			int,
-				PRIMARY KEY (CommentID)
-				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
-
 				
-
-					
-					
-					
-					
+DROP TABLE IF EXISTS tbl_PostTitle;
+CREATE TABLE tbl_PostTitle(
+				PostID			varchar(20) NOT NULL,
+				PPhone		    varchar(10) NOT NULL,
+				PSubmitTime		date,
+				PIsVadilated	int,
+				PSubject		varchar(10) NOT NULL,				
+				PState			int,
+				PLastUpdateTime	date,
+				PRIMARY KEY (PostID)
+				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;					
