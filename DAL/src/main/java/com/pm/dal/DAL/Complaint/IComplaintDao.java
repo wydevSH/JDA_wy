@@ -16,7 +16,7 @@ public interface IComplaintDao {
 	
 	public Complaint updateComplaint(Complaint complaint) throws Exception;
 
-	public List<Complaint> GetComplaintByUserId(String uid,Date time_start,int s,int offset) throws Exception;
+	public List<Complaint> GetComplaintByUserId(String uid,Date max, Date min,int pagesize) throws Exception;
 	
 	public Complaint selectComplaintById(String UID)throws Exception;
 	

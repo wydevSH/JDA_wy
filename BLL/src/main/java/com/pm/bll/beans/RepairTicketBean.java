@@ -48,9 +48,9 @@ public class RepairTicketBean implements IRepairTicketOperation {
 	}
 
 	public List<RepairTicket> GetRepairTicketByUserId(String uid,
-			Date time_start, int s, int offset) throws Exception {
+			Date max, Date min,int pagesize) throws Exception {
 		// TODO Auto-generated method stub
-		return repairticketdao.GetRepairTicketByUserId(uid, time_start, s, offset);
+		return repairticketdao.GetRepairTicketByUserId(uid, max, min, pagesize);
 	}	
 
 }

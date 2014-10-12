@@ -23,21 +23,27 @@
 	<select id="selectComplaint" parameterClass="java.util.Map" resultClass="Complaint">
 		select ComplaintID,CUserID,CTicketSubject,CTicketContent,CContactTimeType,CHandler,CHandlerPhone,CResumeTimes,CStatus,CUpdateTime from tbl_complaint
 		<dynamic prepend="WHERE">
-			<isNotNull prepend="and" property="time_update"> 
-			  CUpdateTime >=#time_pub#
+			<isNotNull prepend="and" property="Min"> 
+			  CUpdateTime >=#Min#
+			</isNotNull> 
+			<isNotNull prepend="and" property="Max"> 
+			 #Max#>= CUpdateTime 
 			</isNotNull> 
 			<isNotNull prepend="and" property="user_id"> 
 			 	 CUserID =#user_id#
 			</isNotNull> 
 		</dynamic>
+		 order by CUpdateTime desc
 		 <dynamic prepend=""> 
-          	<isNotNull property="_start"> 
+
                <isNotNull property="_size"> 
-                 	limit #_start#, #_size# 
-                 </isNotNull> 
-            </isNotNull> 
+
+                 	limit  #_size# 
+                 </isNotNull>  
+
            </dynamic> 
-           order by CUpdateTime desc
+
+          
 	</select>
 
 

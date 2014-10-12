@@ -12,7 +12,6 @@ public class repairticketbeanTest {
 	public void test() throws Exception {
 		RepairTicketBean bean=new RepairTicketBean();
 		RepairTicket repairticket=new RepairTicket();
-		repairticket.setRepairTicketID("T001");
 		repairticket.setRUserID("ansin");
 		repairticket.setRTicketSubject("Test01, subject1");
 		repairticket.setRTicketContent("Test01: Repair Windows");

@@ -36,16 +36,8 @@ public class NoticeDaoImpl implements INoticeDao{
 	
 	public Notice addNotice(Notice notice) throws Exception {
 		// TODO Auto-generated method stub
-			
-		    if(notice.getNBiotopeID() != null ||  !(notice.getNBiotopeID().equals(""))){
-		    	
-		    	notice.setNoticeID(String.valueOf(System.currentTimeMillis()));
-				sqlMapClient.insert("addNotice", notice);		
-		
-				return notice;
-		    }
-		    
-		    return null;
+		sqlMapClient.insert("addNotice", notice);
+		return selectNoticeByID(notice.getNoticeID());
 	}
 
 	public boolean deleteNoticeById(String id) throws SQLException {
@@ -86,30 +78,38 @@ public class NoticeDaoImpl implements INoticeDao{
 	
 		return notice;
 	}
+	
 
-	public List<Notice> selectNotice(Date time_start, int s,int offset) throws SQLException {
+	public List<Notice> selectNotice(Date max, Date min, int pagesize)
+			throws Exception {
+		List<Notice> notices = null;
+		Map<String,Object> c=new HashMap<String,Object>();
+		c.put("max", max);
+		c.put("min", min);
+		c.put("_size", pagesize);
+		notices = (List<Notice>) sqlMapClient.queryForList("selectNotice", c);
+		
+
+		return notices;
+	}
+
+
+	public List<Notice> selectNoticeByBiotopeID(String biotopeID, Date max,
+			Date min, int pagesize) throws Exception {
 		// TODO Auto-generated method stub
 		List<Notice> notices = null;
 		Map<String,Object> c=new HashMap<String,Object>();
-		c.put("time_pub", time_start);
-		c.put("_start", s);
-		c.put("_size", offset);
-		notices = (List<Notice>) sqlMapClient.queryForList("selectNotice", c);
+		c.put("biotopeID", biotopeID);
+		c.put("max", max);
+		c.put("min", min);
+		c.put("_size", pagesize);
+		notices = (List<Notice>) sqlMapClient.queryForList("selectNoticeByBiotopeID", c);
 		
 
 		return notices;
 	}
 	
 		
-	public ArrayList<Notice> selectNoticeByBiotopeID(String biotopeID) throws SQLException {
-		// TODO Auto-generated method stub
-		ArrayList<Notice> noticeList = new ArrayList<Notice>();
-		
-		noticeList = (ArrayList) sqlMapClient.queryForObject("selectNoticeByBiotopeId",biotopeID);
-		
-		return noticeList;
-	}
-	
 	public boolean IsExsitNoticeById(String uid) throws SQLException {
 		// TODO Auto-generated method stub		
 			
@@ -127,6 +127,7 @@ public class NoticeDaoImpl implements INoticeDao{
 	    if(notice.getNBiotopeID()==null || notice.getNBiotopeID().equals(""))
 	    	return null;
 		 notice.setNoticeID(String.valueOf(Calendar.getInstance().getTimeInMillis()));
+		 System.out.print("===NoticeDaoImpl.java : save()===");
 		 System.out.print(notice.getNoticeID());
 		 return this.addNotice(notice);
 	}
@@ -138,4 +139,5 @@ public class NoticeDaoImpl implements INoticeDao{
 	    }
 
     }
+
 }

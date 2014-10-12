@@ -48,9 +48,9 @@ public class ComplaintBean implements IComplaintOperation {
 	}
 
 	public List<Complaint> GetComplaintByUserId(String uid,
-			Date time_start, int s, int offset) throws Exception {
+			Date max, Date min,int pagesize) throws Exception {
 		// TODO Auto-generated method stub
-		return complaintdao.GetComplaintByUserId(uid, time_start, s, offset);
+		return complaintdao.GetComplaintByUserId(uid, max, min, pagesize);
 	}	
 
 }

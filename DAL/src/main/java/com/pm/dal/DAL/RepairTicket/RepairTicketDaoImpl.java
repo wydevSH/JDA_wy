@@ -69,13 +69,13 @@ public class RepairTicketDaoImpl implements IRepairTicketDao{
 	}
 
 	public List<RepairTicket> GetRepairTicketByUserId(String uid,
-			Date time_start, int s, int offset) throws Exception {
+			Date max, Date min,int pagesize) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String,Object> c=new HashMap<String,Object>();
-		c.put("time_update", time_start);
 		c.put("user_id", uid);
-		c.put("_start", s);
-		c.put("_size", offset);
+		c.put("max", max);
+		c.put("min", min);
+		c.put("pagesize", pagesize);
 	
 		List<RepairTicket> repairtickets = (List<RepairTicket>) sqlMapClient.queryForList("selectRepairTicket", c);
 		
@@ -91,26 +91,35 @@ public class RepairTicketDaoImpl implements IRepairTicketDao{
 		return repairTicket;
 	}
 
+	public RepairTicket GetRepairTicketById(String rid) throws Exception {
+		// TODO Auto-generated method stub
+		RepairTicket repairTicket = null;
+		
+		repairTicket = (RepairTicket) sqlMapClient.queryForObject("selectRepairTicketById", rid);
+	
+		return repairTicket;
+	}
+
 	public RepairTicket Save(RepairTicket repairticket) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.print("---------RepairTicketDaoImpl.jave :: save--------");
-		System.out.print(repairticket.getRepairTicketID());
-		if( repairticket.getRepairTicketID() ==null || repairticket.getRepairTicketID().equals(""))//never add before 			
-		      return null;
-		else{
-		      
-		if(repairticket.getRUserID() == null || repairticket.getRUserID().equals(""))
-			return null;
-		else{
-			 if(this.IsExsitRepairTicketById(repairticket.getRepairTicketID())){//this is wrong!
-				RepairTicket srepairticket = this.updateRepairTicket(repairticket);	
-				return srepairticket;
-			 }	 
 
-			 return this.addRepairTicket(repairticket);
+
+		if(repairticket.getRepairTicketID()==null ||repairticket.getRepairTicketID().equals("")){//never add before
+			if(repairticket.getRUserID()==null || repairticket.getRUserID().equals(""))
+				return null;	
+			 
+			repairticket.setRepairTicketID((String.valueOf(Calendar.getInstance().getTimeInMillis() )));
+			return this.addRepairTicket(repairticket);
 		}
-		 }
-		
+
+		else{
+			
+			if(!this.IsExsitRepairTicketById(repairticket.getRepairTicketID())){//this is wrong!
+				return null;
+			}
+			RepairTicket srepairticket = this.updateRepairTicket(repairticket);	
+			return srepairticket;
+		}
 	}
 
 

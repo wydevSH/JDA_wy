@@ -17,7 +17,7 @@ public class noticebeanTest {
 	public void test() throws Exception {
 		NoticeBean bean=new NoticeBean();
 		Notice notice=new Notice();
-		notice.setNBiotopeID("GY0001");
+		notice.setNBiotopeID("Gongyuan");
     	notice.setNContent("Test_Content");
     	notice.setNPoster("Jeff1");
     	notice.setNSubject("Test_Subject");

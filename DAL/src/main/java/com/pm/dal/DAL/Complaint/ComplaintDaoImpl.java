@@ -13,7 +13,7 @@ import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 import com.pm.pojo.Complaint;
-import com.pm.pojo.RepairTicket;
+
 
 public class ComplaintDaoImpl implements IComplaintDao {
 
@@ -89,14 +89,14 @@ public class ComplaintDaoImpl implements IComplaintDao {
 
 	
 
-	public List<Complaint> GetComplaintByUserId(String uid,Date time_start,int s,int offset) throws SQLException {
+	public List<Complaint> GetComplaintByUserId(String uid,Date max, Date min,int pagesize) throws SQLException {
 		// TODO Auto-generated method stub	
 		
 		Map<String,Object> c=new HashMap<String,Object>();
-		c.put("time_update", time_start);
 		c.put("user_id", uid);
-		c.put("_start", s);
-		c.put("_size", offset);
+		c.put("max", max);
+		c.put("min", min);
+		c.put("pagesize", pagesize);
 	
 		List<Complaint> complaints = (List<Complaint>) sqlMapClient.queryForList("selectComplaint", c);
 		
@@ -115,32 +115,23 @@ public class ComplaintDaoImpl implements IComplaintDao {
 	
 	
 	public Complaint Save(Complaint complaint) throws Exception {
-		// TODO Auto-generated method stub		
-
-		System.out.print("---------ComplaintDaoImpl.jave :: save--------");
-		System.out.print(complaint.getComplaintID());
-		if( complaint.getComplaintID() == null || complaint.getComplaintID().equals(""))//never add before 			
-		      return null;
-		else{
-		      
-		if(complaint.getCUserID() == null || complaint.getCUserID().equals(""))
-			return null;
-		else{
-			 if(this.IsExsitComplaintById(complaint.getComplaintID())){//this is wrong!
-				Complaint scomplaint = this.updateComplaint(complaint);
-				return scomplaint;
-			 }	 
-
-			 return this.addComplaint(complaint);
-		}
-		 }
+		// TODO Auto-generated method stub			
 			
-	
+			if(complaint.getComplaintID()==null ||complaint.getComplaintID().equals("")){//never add before 
+				
+				if(complaint.getCUserID()==null || complaint.getCUserID().equals(""))
+					return null;			 
+				 complaint.setComplaintID((String.valueOf(Calendar.getInstance().getTimeInMillis() )));
+				 return this.addComplaint(complaint);
+			}
+			else{
+				if(!this.IsExsitComplaintById(complaint.getComplaintID())){//this is wrong!
+					return null;
+				}
+				
+				 return this.updateComplaint(complaint);
+				 
+				}	
 
 	}
-
-
-
-
-
 }

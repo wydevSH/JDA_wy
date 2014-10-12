@@ -32,12 +32,16 @@ public class UserDaoImpl implements IUserDao{
 	public User addUser(User user) throws Exception {
 		// TODO Auto-generated method stub
 	
-			if(this.IsExsitUserByPhone(user.getUPhone()))
-				return null;	
-			user.setUID(String.valueOf(System.currentTimeMillis()));
-			sqlMapClient.insert("addUser", user);		
-		
-			return user;
+
+
+
+
+		 sqlMapClient.insert("addUser", user);
+
+
+		 User u= this.selectUserById(user.getUID());
+        
+         return u;
 	}
 
 	public boolean deleteUserById(String id) throws SQLException {
@@ -54,7 +58,7 @@ public class UserDaoImpl implements IUserDao{
 		return flag;
 	}
 
-	public boolean updateUser(User user) throws SQLException {
+	public User updateUser(User user) throws SQLException {
 		// TODO Auto-generated method stub
 		boolean flag = false;
 		int object = 0;
@@ -62,10 +66,12 @@ public class UserDaoImpl implements IUserDao{
 		object = sqlMapClient.update("updateUser", user);
 		
 		if (object != 0) {
-			flag = true;
+
+			
+			return user;
 
 		}
-		return flag;
+		return null;
 	}
 
 

@@ -10,7 +10,6 @@ public class complaintbeanTest {
 	public void test() throws Exception {
 		ComplaintBean bean=new ComplaintBean();
 		Complaint complaint=new Complaint();
-		complaint.setComplaintID("C0002");
     	complaint.setCUserID("Ansin");
     	complaint.setCTicketSubject("Test002: subject2");
     	complaint.setCTicketContent("Test002: Content2");

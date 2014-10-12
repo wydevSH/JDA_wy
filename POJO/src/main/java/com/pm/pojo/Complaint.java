@@ -1,5 +1,7 @@
 package com.pm.pojo;
 
+import java.util.Date;
+
 public class Complaint {
 	private String ComplaintID;
 	private String CUserID;
@@ -10,8 +12,7 @@ public class Complaint {
 	private String CHandlerPhone;
 	private int CResumeTimes;
 	private int CStatus;
-	private String CUpdateTime;
-	
+	private Date CUpdateTime;	
 	public void setComplaintID(String ComplaintID){
 		this.ComplaintID=ComplaintID;
 	}
@@ -66,10 +67,10 @@ public class Complaint {
 	public int getCStatus(){
 		return CStatus;
 	}
-	public String getCUpdateTime() {
+	public Date getCUpdateTime() {
 		return CUpdateTime;
 	}
-	public void setCUpdateTime(String cUpdateTime) {
+	public void setCUpdateTime(Date cUpdateTime) {
 		CUpdateTime = cUpdateTime;
 	}
 }

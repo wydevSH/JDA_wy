@@ -18,7 +18,6 @@ public class ComplaintDaoImplTest extends TestCase {
 		
 		Complaint complaint=new Complaint();
     	Assert.assertNull(dao.Save(complaint));	
-    	complaint.setComplaintID("C0001");
     	complaint.setCUserID("Ansin");
     	complaint.setCTicketSubject("Test001: subject1");
     	complaint.setCTicketContent("Test001: Content1");

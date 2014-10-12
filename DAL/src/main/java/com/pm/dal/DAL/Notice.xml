@@ -18,22 +18,55 @@
 		select NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted from tbl_notice
 		where NoticeID = #NoticeID#
 	</select>
-
+	
 	<select id="selectNotice" parameterClass="java.util.Map" resultClass="Notice">
-		select NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted from tbl_notice
+		select NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted,NUpdateTime from tbl_Notice
 		<dynamic prepend="WHERE">
-			<isNotNull prepend="and" property="time_pub"> 
-			  NPubTime >=#time_pub#
+			<isNotNull prepend="and" property="min"> 
+
+			  NUpdateTime >= #min#
 			</isNotNull> 
+			<isNotNull prepend="and" property="max"> 
+			  #max# >= NUpdateTime 
+			</isNotNull> 	
 		</dynamic>
-		 <dynamic prepend=""> 
-          	<isNotNull property="_start"> 
+			order by NUpdateTime desc
+		 <dynamic prepend="">          	
+
                <isNotNull property="_size"> 
-                 	limit #_start#, #_size# 
-                 </isNotNull> 
-            </isNotNull> 
+
+                 	limit #_size# 
+                 </isNotNull>   
+
            </dynamic> 
-           order by NPubTime desc
+
+	</select>
+
+<select id="selectNoticeByBiotopeID" parameterClass="java.util.Map" resultClass="Notice">
+		select NoticeID,NBiotopeID,NPoster,NPubTime,NExpTime,NSubject,NContent,NLabel,NIsTop,NIsDeleted,NUpdateTime from tbl_Notice
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="and" property="biotopeID"> 
+
+			  NBiotopeID = #biotopeID#
+			</isNotNull> 
+			<isNotNull prepend="and" property="min"> 
+
+			  NUpdateTime >= #min#
+			</isNotNull> 
+			<isNotNull prepend="and" property="max"> 
+			  #max# >= NUpdateTime 
+			</isNotNull> 	
+		</dynamic>
+			order by NUpdateTime desc
+		 <dynamic prepend="">          	
+
+               <isNotNull property="_size"> 
+
+                 	limit #_size# 
+                 </isNotNull>   
+
+           </dynamic> 
+
 	</select>
 
 	<insert id="addNotice" parameterClass="Notice">

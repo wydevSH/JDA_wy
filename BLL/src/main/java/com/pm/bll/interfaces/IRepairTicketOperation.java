@@ -15,7 +15,7 @@ import java.util.List;
 public interface IRepairTicketOperation {
 	
     public RepairTicket GetRepairTicketByID(String ID) throws Exception;
-    public List<RepairTicket> GetRepairTicketByUserId(String uid,Date time_start,int s,int offset) throws Exception;
+    public List<RepairTicket> GetRepairTicketByUserId(String uid,Date max, Date min,int pagesize) throws Exception;
     public Boolean deleteRepairTicketByID(String ID) throws Exception;
     public RepairTicket Save(RepairTicket repairticket) throws Exception;	
 	

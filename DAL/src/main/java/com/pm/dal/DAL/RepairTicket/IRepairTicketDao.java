@@ -17,9 +17,9 @@ public interface IRepairTicketDao {
 	
 	public RepairTicket updateRepairTicket(RepairTicket repairticket) throws Exception;
 
-	public List<RepairTicket> GetRepairTicketByUserId(String uid,Date time_start,int s,int offset) throws Exception;
+	public List<RepairTicket> GetRepairTicketByUserId(String uid,Date max, Date min,int pagesize) throws Exception;
 	
-	public RepairTicket selectRepairTicketById(String UID)throws Exception;
+	public RepairTicket selectRepairTicketById(String uid)throws Exception;
 	
 	public RepairTicket Save(RepairTicket repairticket)throws Exception;
 

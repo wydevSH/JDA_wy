@@ -23,24 +23,29 @@
 
       
 	<select id="selectRepairTicket" parameterClass="java.util.Map" resultClass="RepairTicket">
-		select	 RepairTicketID,RUserID,RTicketSubject,RTicketContent,RContactTime,RHandler,RHandlerPhone,RResumeTimes,RStatus,RComment,RUpdateTime,RCount from tbl_RepairTicket
+		select	 RepairTicketID,RUserID,RTicketSubject,RTicketContent,RContactTime,RHandler,RHandlerPhone,RResumeTimes,RStatus,RComment,RUpdateTime from tbl_RepairTicket
 		<dynamic prepend="WHERE">
-			<isNotNull prepend="and" property="time_update"> 
-			  RUpdateTime >= #time_pub#
+			<isNotNull prepend="and" property="Min"> 
+			  RUpdateTime >=#Min#
+			</isNotNull> 
+			<isNotNull prepend="and" property="Max"> 
+			  #Max# >= RUpdateTime 
 			</isNotNull> 
 			<isNotNull prepend="and" property="user_id"> 
-			 	 RUserID = #user_id#
+			 	 RUserID =#user_id#
 			</isNotNull> 
 		</dynamic>
-		 <dynamic prepend=""> 
-          	<isNotNull property="_start"> 
+		order by RUpdateTime desc
+		 <dynamic prepend="">          	
+
                <isNotNull property="_size"> 
-                 	limit #_start#, #_size# 
-                 </isNotNull> 
-            </isNotNull> 
+
+                 	limit #_size# 
+                 </isNotNull>   
+
            </dynamic> 
-           order by RUpdateTime desc
-	</select>	 
+
+	</select> 
 
      
 	<insert id="addRepairTicket" parameterClass="RepairTicket">

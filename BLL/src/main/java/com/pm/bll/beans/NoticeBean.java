@@ -1,7 +1,8 @@
 package com.pm.bll.beans;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import com.pm.bll.interfaces.INoticeOperation;
 import com.pm.dal.DAL.Notice.INoticeDao;
@@ -36,9 +37,9 @@ public class NoticeBean implements INoticeOperation {
 		return noticedao.selectNoticeByID(ID);
 	}
 
-	public ArrayList<Notice> GetNoticeByBiotopeID(String biotope) throws Exception {
+	public List<Notice> GetNoticeByBiotopeID(String biotope, Date max, Date min,int pagesize) throws Exception {
 		// TODO Auto-generated method stub
-		return noticedao.selectNoticeByBiotopeID(biotope);
+		return noticedao.selectNoticeByBiotopeID(biotope, max, min, pagesize);
 	}
 
 	public Boolean deleteNoticeByID(String ID) throws Exception {

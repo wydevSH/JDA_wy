@@ -15,7 +15,7 @@ import java.util.List;
 public interface IComplaintOperation {
 	
     public Complaint GetComplaintByID(String ID) throws Exception;
-    public List<Complaint> GetComplaintByUserId(String uid,Date time_start,int s,int offset) throws Exception;
+    public List<Complaint> GetComplaintByUserId(String uid,Date max, Date min,int pagesize) throws Exception;
     public Boolean deleteComplaintByID(String ID) throws Exception;
     public Complaint Save(Complaint complaint) throws Exception;	
 	

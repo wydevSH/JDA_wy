@@ -18,12 +18,11 @@ public class RepairTicketDaoImplTest extends TestCase {
 		
 		RepairTicket repairticket=new RepairTicket();
     	Assert.assertNull(dao.Save(repairticket));	
-		repairticket.setRepairTicketID("T002");
 		repairticket.setRUserID("david");
 		repairticket.setRTicketSubject("Test02, subject1");
 		repairticket.setRTicketContent("Test02: Repair Windows");
 		repairticket.setRStatus(0);	
-		System.out.print("===============================");
+		System.out.print("====RepairTicketDaoImplTest====");
 		System.out.print(repairticket.getRepairTicketID());
         RepairTicket rt1 = dao.Save(repairticket);
         Assert.assertNotNull(rt1);
