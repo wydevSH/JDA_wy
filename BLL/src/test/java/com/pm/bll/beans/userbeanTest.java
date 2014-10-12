@@ -16,13 +16,14 @@ public class userbeanTest {
 	@Test
 	public void test() throws Exception {
 		UserBean bean=new UserBean();
-		User user=new User();
-    	
+		User user=new User();    	
 		user.setUPhone("1123456");
 		user.setUPassword("112346");
 		user.setURegTime(new Date());
 		User user1=bean.Save(user);
 		Assert.assertNotNull(user1);
+		bean.deleteUserByID(user1.getUID());
+		Assert.assertNull(bean.GetUserByID(user1.getUID()));
 	}
 
 }

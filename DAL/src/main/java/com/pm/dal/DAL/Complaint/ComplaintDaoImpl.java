@@ -13,6 +13,7 @@ import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
 import com.pm.pojo.Complaint;
+import com.pm.pojo.RepairTicket;
 
 public class ComplaintDaoImpl implements IComplaintDao {
 
@@ -103,7 +104,7 @@ public class ComplaintDaoImpl implements IComplaintDao {
 		
 	
 	}
-	public boolean IsExsitComplaintById(String uid) throws SQLException {
+	public boolean IsExsitComplaintById(String uid) throws Exception {
 		// TODO Auto-generated method stub		
 			
 		return this.selectComplaintById(uid)!=null;
@@ -115,20 +116,24 @@ public class ComplaintDaoImpl implements IComplaintDao {
 	
 	public Complaint Save(Complaint complaint) throws Exception {
 		// TODO Auto-generated method stub		
-		
-			
-			if(complaint.getComplaintID()==null ||complaint.getComplaintID().equals("")){//never add before 			
-			 
-				 complaint.setComplaintID((String.valueOf(Calendar.getInstance().getTimeInMillis() )));
-				 return this.addComplaint(complaint);
-			}
-			else{
-				if(!this.IsExsitComplaintById(complaint.getComplaintID())){//this is wrong!
-					return null;
-				}
-				 this.updateComplaint(complaint);	
-				 return complaint;
-			}
+
+		System.out.print("---------ComplaintDaoImpl.jave :: save--------");
+		System.out.print(complaint.getComplaintID());
+		if( complaint.getComplaintID() == null || complaint.getComplaintID().equals(""))//never add before 			
+		      return null;
+		else{
+		      
+		if(complaint.getCUserID() == null || complaint.getCUserID().equals(""))
+			return null;
+		else{
+			 if(this.IsExsitComplaintById(complaint.getComplaintID())){//this is wrong!
+				Complaint scomplaint = this.updateComplaint(complaint);
+				return scomplaint;
+			 }	 
+
+			 return this.addComplaint(complaint);
+		}
+		 }
 			
 	
 

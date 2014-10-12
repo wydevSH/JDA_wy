@@ -10,6 +10,8 @@ public class Complaint {
 	private String CHandlerPhone;
 	private int CResumeTimes;
 	private int CStatus;
+	private String CUpdateTime;
+	
 	public void setComplaintID(String ComplaintID){
 		this.ComplaintID=ComplaintID;
 	}
@@ -63,6 +65,12 @@ public class Complaint {
 	}
 	public int getCStatus(){
 		return CStatus;
+	}
+	public String getCUpdateTime() {
+		return CUpdateTime;
+	}
+	public void setCUpdateTime(String cUpdateTime) {
+		CUpdateTime = cUpdateTime;
 	}
 }
 

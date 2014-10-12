@@ -34,7 +34,6 @@ public class RepairTicketDaoImpl implements IRepairTicketDao{
 	public RepairTicket addRepairTicket(RepairTicket repairticket)
 			throws Exception {
 	
-		repairticket.setRepairTicketID(String.valueOf(System.currentTimeMillis()));
 		sqlMapClient.insert("addRepairTicket", repairticket);		
 	
 		return repairticket;
@@ -94,22 +93,28 @@ public class RepairTicketDaoImpl implements IRepairTicketDao{
 
 	public RepairTicket Save(RepairTicket repairticket) throws Exception {
 		// TODO Auto-generated method stub
-		if(repairticket.getRepairTicketID()==null ||repairticket.getRepairTicketID().equals("")){//never add before 			
-			 
-			repairticket.setRepairTicketID((String.valueOf(Calendar.getInstance().getTimeInMillis() )));
+		System.out.print("---------RepairTicketDaoImpl.jave :: save--------");
+		System.out.print(repairticket.getRepairTicketID());
+		if( repairticket.getRepairTicketID() ==null || repairticket.getRepairTicketID().equals(""))//never add before 			
+		      return null;
+		else{
+		      
+		if(repairticket.getRUserID() == null || repairticket.getRUserID().equals(""))
+			return null;
+		else{
+			 if(this.IsExsitRepairTicketById(repairticket.getRepairTicketID())){//this is wrong!
+				RepairTicket srepairticket = this.updateRepairTicket(repairticket);	
+				return srepairticket;
+			 }	 
+
 			 return this.addRepairTicket(repairticket);
 		}
-		else{
-			if(!this.IsExsitRepairTicketById(repairticket.getRepairTicketID())){//this is wrong!
-				return null;
-			}
-			RepairTicket srepairticket = this.updateRepairTicket(repairticket);	
-			return srepairticket;
-		}
+		 }
+		
 	}
 
 
-	private boolean IsExsitRepairTicketById(String repairTicketID) throws Exception {
+	public boolean IsExsitRepairTicketById(String repairTicketID) throws Exception {
 		// TODO Auto-generated method stub
 		return this.selectRepairTicketById(repairTicketID) != null;
 	}

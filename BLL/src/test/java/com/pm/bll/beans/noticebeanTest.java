@@ -17,7 +17,6 @@ public class noticebeanTest {
 	public void test() throws Exception {
 		NoticeBean bean=new NoticeBean();
 		Notice notice=new Notice();
-
 		notice.setNBiotopeID("GY0001");
     	notice.setNContent("Test_Content");
     	notice.setNPoster("Jeff1");
@@ -25,6 +24,8 @@ public class noticebeanTest {
     	notice.setNLabel("Tongji,Wuye,Gongyuan");
     	Notice notice1=bean.Save(notice);
     	Assert.assertNotNull(notice1);
+    	bean.deleteNoticeByID(notice1.getNoticeID());
+    	Assert.assertNull(bean.GetNoticeByID(notice1.getNoticeID()));
 	}
 
 }

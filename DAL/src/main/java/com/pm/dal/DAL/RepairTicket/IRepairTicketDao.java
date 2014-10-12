@@ -10,6 +10,7 @@ public interface IRepairTicketDao {
 	
 	public RepairTicket addRepairTicket(RepairTicket repairticket) throws Exception;
 
+	public boolean IsExsitRepairTicketById(String repairTicketID) throws Exception;
 
 	public boolean deleteRepairTicketById(String id)throws Exception;
 

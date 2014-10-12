@@ -1,24 +1,22 @@
 package com.pm.pojo;
 
+import java.sql.Date;
+
 public class RepairTicket {
+	
 	String RepairTicketID ;
 	String RUserID			;
 	String RTicketSubject	;
 	String RTicketContent	;
-	String RContactTime	;
+	Date RContactTime	;
 	String RHandler		;
-	String RHanderPhone	;
-	String RResumeTimes	;
-	String RStatus			;
+	String RHandlerPhone	;
+	int RResumeTimes	;
+	int RStatus			;
 	String RComment			;
-	int    Rcount;
+	Date RUpdateTime;
+	int    RCount;
 	
-	public int getRcount() {
-		return Rcount;
-	}
-	public void setRcount(int rcount) {
-		Rcount = rcount;
-	}
 	public String getRepairTicketID() {
 		return RepairTicketID;
 	}
@@ -43,10 +41,10 @@ public class RepairTicket {
 	public void setRTicketContent(String rTicketContent) {
 		RTicketContent = rTicketContent;
 	}
-	public String getRContactTime() {
+	public Date getRContactTime() {
 		return RContactTime;
 	}
-	public void setRContactTime(String rContactTime) {
+	public void setRContactTime(Date rContactTime) {
 		RContactTime = rContactTime;
 	}
 	public String getRHandler() {
@@ -55,22 +53,22 @@ public class RepairTicket {
 	public void setRHandler(String rHandler) {
 		RHandler = rHandler;
 	}
-	public String getRHanderPhone() {
-		return RHanderPhone;
+	public String getRHandlerPhone() {
+		return RHandlerPhone;
 	}
-	public void setRHanderPhone(String rHanderPhone) {
-		RHanderPhone = rHanderPhone;
+	public void setRHandlerPhone(String rHandlerPhone) {
+		RHandlerPhone = rHandlerPhone;
 	}
-	public String getRResumeTimes() {
+	public int getRResumeTimes() {
 		return RResumeTimes;
 	}
-	public void setRResumeTimes(String rResumeTimes) {
+	public void setRResumeTimes(int rResumeTimes) {
 		RResumeTimes = rResumeTimes;
 	}
-	public String getRStatus() {
+	public int getRStatus() {
 		return RStatus;
 	}
-	public void setRStatus(String rStatus) {
+	public void setRStatus(int rStatus) {
 		RStatus = rStatus;
 	}
 	public String getRComment() {
@@ -79,6 +77,17 @@ public class RepairTicket {
 	public void setRComment(String rComment) {
 		RComment = rComment;
 	}
-	
-	
+	public Date getRUpdateTime() {
+		return RUpdateTime;
+	}
+	public void setRUpdateTime(Date rUpdateTime) {
+		RUpdateTime = rUpdateTime;
+	}
+	public int getRcount() {
+		return RCount;
+	}
+	public void setRcount(int rcount) {
+		RCount = rcount;
+	}
+
 }

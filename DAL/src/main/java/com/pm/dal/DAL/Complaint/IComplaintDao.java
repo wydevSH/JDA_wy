@@ -9,6 +9,7 @@ public interface IComplaintDao {
 
 	public Complaint addComplaint(Complaint complaint) throws Exception;
 
+	public boolean IsExsitComplaintById(String uid) throws Exception;
 
 	public boolean deleteComplaintById(String id)throws Exception;
 
