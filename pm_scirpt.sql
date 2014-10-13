@@ -181,8 +181,12 @@ CREATE TABLE tbl_RepairTicket(
 				PRIMARY KEY (RepairTicketID)
 				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
-				
-
+DROP TABLE IF EXISTS tbl_Token
+CREATE TABLE tbl_RepairTicket(				
+				Phone varchar(20) NOT NULL,
+				token varchar(20) NOT NULL,
+				expiretime date   NOT NULL,
+				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 					
 					
 					

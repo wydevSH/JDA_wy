@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+   "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+	<update id="updateExpire" parameterClass="Java.util.date">
+		update tbl_token set token='' where expireTime <#time#
+	</update>
+
+		<insert id="addToken" parameterClass="Token">
+		insert into tbl_Token(Phone,token,expiretime) 
+		values(#Phone#,#token#,#expiretime#);
+	</insert>
+
+
+</sqlMap>
