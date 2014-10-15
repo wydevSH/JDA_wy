@@ -16,13 +16,13 @@
 	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
 	<select id="selectPostById" parameterClass="String" resultClass="Post">
 		select PostID,PPhone,PSubmitTime,PIsVadilated,PSubject,PBodyText,PState,PRootID,PReplyPostID,PUpdateTime
-		from tbl_post
+		from tbl_Post
 		where PostID = #id#
 	</select>
 
 	<select id="selectPostbyTimeRangeAndPhone" parameterClass="java.util.Map" resultClass="Post">
 		select PostID,PPhone,PSubmitTime,PIsVadilated,PSubject,PBodyText,PState,PRootID,PReplyPostID,PUpdateTime
-		from tbl_post
+		from tbl_Post
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="and" property="Min"> 
 			  PUpdateTime >=#Min#
@@ -42,28 +42,110 @@
            </dynamic> 
 	</select>
 
+	
+		<select id="selectPostbyMultiCri" parameterClass="java.util.Map" resultClass="Post">
+		select PostID,PPhone,PSubmitTime,PIsVadilated,PSubject,PBodyText,PState,PRootID,PReplyPostID,PUpdateTime
+		from tbl_Post
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="and" property="Min"> 
+			  PUpdateTime >=#Min#
+			</isNotNull> 
+			<isNotNull prepend="and" property="Max"> 
+			  #Max# >= PUpdateTime 
+			</isNotNull> 
+			<isNotNull prepend="and" property="Phone"> 
+			 	 PPhone =#Phone#
+			</isNotNull> 
+			<isNotNull prepend="and" property="RootID"> 
+			 	 RootID =#RootID#
+			</isNotNull> 
+		</dynamic>
+		order by PUpdateTime desc
+		 <dynamic prepend="">          	
+               <isNotNull property="_size"> 
+                 	limit #_size# 
+                 </isNotNull>   
+           </dynamic> 
+	</select>
+	
+		<select id="selectPostTitlebyMultiCri" parameterClass="java.util.Map" resultClass="Post">
+		select PostID,	PPhone,	PSubmitTime,PIsVadilated,PSubject,PState,PLastUpdateTime	
+		from tbl_PostTitle
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="and" property="Min"> 
+			  PUpdateTime >=#Min#
+			</isNotNull> 
+			<isNotNull prepend="and" property="Max"> 
+			  #Max# >= PUpdateTime 
+			</isNotNull> 
+			<isNotNull prepend="and" property="Phone"> 
+			 	 PPhone =#Phone#
+			</isNotNull> 
+			<isNotNull prepend="and" property="RootID"> 
+			 	 RootID =#RootID#
+			</isNotNull> 
+		</dynamic>
+		order by PUpdateTime desc
+		 <dynamic prepend="">          	
+               <isNotNull property="_size"> 
+                 	limit #_size# 
+                 </isNotNull>   
+           </dynamic> 
+	</select>
+	
+	
+	
 
+	<select id="GetNewPostCountFromLast" parameterClass="java.util.Map" resultClass="int">
+		select count(*)
+		from tbl_Post
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="and" property="Min"> 
+			  PUpdateTime >=#Min#
+		</dynamic>
+	</select>
+	
+	<select id="GetNewPostTitleCountFromLast" parameterClass="java.util.Map" resultClass="int">
+		select count(*)
+		from tbl_Post
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="and" property="Min"> 
+			  PLastUpdateTime >=#Min#
+		</dynamic>
 
+	</select>
 
 
 	<insert id="addPost" parameterClass="Post">
-		insert into tbl_post(PostID,PPhone,PSubmitTime,PIsVadilated,PSubject,PBodyText,PState,PRootID,PReplyPostID,PUpdateTime)
+		insert into tbl_Post(PostID,PPhone,PSubmitTime,PIsVadilated,PSubject,PBodyText,PState,PRootID,PReplyPostID,PUpdateTime)
 		values(#PostID#, #PPhone#,#PSubmitTime#,#PIsVadilated#,#PSubject#,#PBodyText#,#PState#,#PRootID#,#PReplyPostID#,#PUpdateTime#)
 	</insert>
 
+	 <insert id="addPostTitle" parameterClass="PostTitle">
+		insert into tbl_PostTitle(	PostID,PPhone,PSubmitTime,PIsVadilated,	PSubject,PState,PLastUpdateTime	)
+		values(	#PostID#,#PPhone#,#PSubmitTime#,#PIsVadilated#,	#PSubject#,#PState#,#PLastUpdateTime#)
+	</insert>
 
 
 	<delete id="deletePostById" parameterClass="String">
 		<!-- #id#里的id可以随意取，但是上面的insert则会有影响，因为上面的name会从Student里的属性里去查找 -->
 		<!-- 我们也可以这样理解，如果有#占位符，则ibatis会调用parameterClass里的属性去赋值 -->
-		delete from tbl_post
+		delete from tbl_Post
 		where PostID = #id#
 
 	</delete>
 
 	<update id="updatePost" parameterClass="Post">
-		update tbl_post
+		update tbl_Post
 		set PostID=#PostID#,PPhone=#PPhone#,PSubmitTime=#PSubmitTime#,PIsVadilated=#PIsVadilated#,PSubject=#PSubject#,PBodyText=#PBodyText#,PState=#PState#,PRootID=#PRootID#,PReplyPostID=#PReplyPostID#,PUpdateTime=#PUpdateTime#
+		where PostID = #PostID#
+	</update>
+	
+	
+	
+	 <update id="updatePostTitle" parameterClass="PostTitle">
+		update tbl_PostTitle
+		set PostID=#PostID#,PPhone=#PPhone#,PSubmitTime=#PSubmitTime#,PIsVadilated=#PIsVadilated#,	PSubject=#PSubject#,PState=#PSubject#,PLastUpdateTime=#PLastUpdateTime#	
 		where PostID = #PostID#
 	</update>
 
