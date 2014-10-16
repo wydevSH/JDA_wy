@@ -12,6 +12,9 @@
 		select * from tbl_PostTitle
 	</select>
 
+	<select id="deleteAllPostTitle" resultClass="Post">
+		delete from tbl_PostTitle
+	</select>
 	<!-- parameterClass表示参数的内容 -->
 	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
 	<select id="selectPostTitleById" parameterClass="String" resultClass="PostTitle">
@@ -39,7 +42,16 @@
            </dynamic> 
 	</select>
 
+	<select id="GetNewPostTitleCountFromLast" parameterClass="java.util.Map" resultClass="int">
+		select count(*)
+		from tbl_Post
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="and" property="Min"> 
+			  PLastUpdateTime >=#Min#
+		 </isNotNull>  
+		</dynamic>
 
+	</select>
 
 
 

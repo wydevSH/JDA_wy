@@ -70,13 +70,13 @@ public class RepairTicketDaoImpl implements IRepairTicketDao{
 	}
 
 	public List<RepairTicket> GetRepairTicketByUserId(String uid,
-			Date time_start, int s, int offset) throws Exception {
+			Date time_start, int time_end, int pagesize) throws Exception {
 		// TODO Auto-generated method stub
 		Map<String,Object> c=new HashMap<String,Object>();
-		c.put("time_update", time_start);
-		c.put("user_id", uid);
-		c.put("_start", s);
-		c.put("_size", offset);
+		c.put("UserID", uid);
+		c.put("Max", time_start);
+		c.put("Min", time_end);
+		c.put("_size", pagesize);
 	
 		List<RepairTicket> repairtickets = (List<RepairTicket>) sqlMapClient.queryForList("selectRepairTicket", c);
 		

@@ -50,7 +50,11 @@ public class PostDaoImpl implements IPostDao{
      	   title.setPSubject(post.getPSubject());
      	   title.setPSubmitTime(post.getPSubmitTime());
      	   
-     	   sqlMapClient.insert("addPostTitle", title);
+     	   if(!this.IsExsitPostTitleById(title.getPostID()))
+     		   sqlMapClient.insert("addPostTitle", title);
+     	   else
+     		  sqlMapClient.update("updatePostTitle", title);
+     	   
      	   sqlMapClient.commitTransaction();
      	   if(rowaffect != 0)
      		return post;
@@ -68,6 +72,12 @@ public class PostDaoImpl implements IPostDao{
 	
 			
 	}
+
+	private boolean IsExsitPostTitleById(String posttitleID) throws Exception {
+		// TODO Auto-generated method stub
+		return this.selectPostTitleById(posttitleID)!= null ;
+	}
+
 
 	public boolean deletePostById(String id) throws Exception {
 
@@ -94,7 +104,9 @@ public class PostDaoImpl implements IPostDao{
         	   sqlMapClient.startTransaction();
         	   
         	   int rowaffect = sqlMapClient.update("updatePost", post);
-        	 
+               PostTitle title=this.selectPostTitleById(post.getPostID());
+               if(title == null )
+            	   throw new RuntimeException("found no matched title");
         	   sqlMapClient.update("updatePostTitleByPost", post);
         	   sqlMapClient.commitTransaction();
         	   if(rowaffect != 0)
@@ -125,7 +137,15 @@ public class PostDaoImpl implements IPostDao{
 	
 		return User;
 	}
-
+	
+	public PostTitle selectPostTitleById(String id) throws Exception {
+		// TODO Auto-generated method stub
+		PostTitle Title = null;
+		
+		Title = (PostTitle) sqlMapClient.queryForObject("selectPostTitleById", id);
+	
+		return Title;
+	}
 
 	
 	public boolean IsExsitPostById(String uid) throws Exception {
@@ -169,7 +189,34 @@ public class PostDaoImpl implements IPostDao{
 		return Posts ;
 	}
 
+	
+	public Integer GetNewPostTitleCount(Date updatetime ) throws Exception
+	{
+		Map<String,Object> c=new HashMap<String,Object>();
+		
+		
+		c.put("MIN", updatetime);	
 
+		Integer count = (Integer) sqlMapClient.queryForObject("GetNewPostTitleCountFromLast", c);
+		
+		return count ;
+		
+		
+	}
+	
+	public Integer GetNewPostCount(Date updatetime ) throws Exception
+	{
+		
+		Map<String,Object> c=new HashMap<String,Object>();
+		
+		
+		c.put("MIN", updatetime);	
+
+		Integer count = (Integer) sqlMapClient.queryForObject("GetNewPostCountFromLast", c);
+		
+		return count ;
+	}
+	 
 	public List<PostTitle> selectPostTitle(Date start, Date end, int pagesize)
 			throws Exception {
 		// TODO Auto-generated method stub

@@ -4,16 +4,15 @@ import java.util.Date;
 
 public class Post {
 	private String PostID;
-	private String PUserID;
+	private String PPhone;
 	private Date PSubmitTime;
 	private int PIsVadilated;
+
 	private String PSubject;
 	private String PBodyText;
-	private int PReplyNum;
-	private int PClickNum;
 	private int PState;
 	private String PLastReplierID;
-	private Date PLastRepTime;
+	private Date PUpdateTime;
 	
 	public void setPostID(String PostID){
 		this.PostID=PostID;
@@ -21,11 +20,12 @@ public class Post {
 	public String getPostID(){
 		return PostID;
 	}
-	public void setPUserID(String PUserID){
-		this.PUserID=PUserID;
+
+	public String getPPhone() {
+		return PPhone;
 	}
-	public String getPUserID(){
-		return PUserID;
+	public void setPPhone(String pPhone) {
+		PPhone = pPhone;
 	}
 	public void setPSubmitTime(Date PSubmitTime){
 		this.PSubmitTime=PSubmitTime;
@@ -51,18 +51,7 @@ public class Post {
 	public String getPBodyText(){
 		return PBodyText;
 	}
-	public void setPReplyNum(int PReplyNum){
-		this.PReplyNum=PReplyNum;
-	}
-	public int getPReplyNum(){
-		return PReplyNum;
-	}
-	public void setPClickNum(int PClickNum){
-		this.PClickNum=PClickNum;
-	}
-	public int getPClickNum(){
-		return PClickNum;
-	}
+
 	public void setPState(int PState){
 		this.PState=PState;
 	}
@@ -75,11 +64,12 @@ public class Post {
 	public String getPLastReplierID(){
 		return PLastReplierID;
 	}
-	public void setPLastRepTime(Date PLastRepTime){
-		this.PLastRepTime=PLastRepTime;
+	public Date getPUpdateTime() {
+		return PUpdateTime;
 	}
-	public Date getPLastRepTime(){
-		return PLastRepTime;
+	public void setPUpdateTime(Date pUpdateTime) {
+		PUpdateTime = pUpdateTime;
 	}
+
 }
 
