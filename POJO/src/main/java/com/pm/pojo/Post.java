@@ -7,11 +7,11 @@ public class Post {
 	private String PPhone;
 	private Date PSubmitTime;
 	private int PIsVadilated;
-
+	private String PRootID; 
 	private String PSubject;
 	private String PBodyText;
 	private int PState;
-	private String PLastReplierID;
+	private String PReplyPostID;
 	private Date PUpdateTime;
 	
 	public void setPostID(String PostID){
@@ -20,7 +20,14 @@ public class Post {
 	public String getPostID(){
 		return PostID;
 	}
-
+	
+	
+	public String getPRootID() {
+		return PRootID;
+	}
+	public void setPRootID(String pRootID) {
+		PRootID = pRootID;
+	}
 	public String getPPhone() {
 		return PPhone;
 	}
@@ -58,11 +65,13 @@ public class Post {
 	public int getPState(){
 		return PState;
 	}
-	public void setPLastReplierID(String PLastReplierID){
-		this.PLastReplierID=PLastReplierID;
+
+	
+	public String getPReplyPostID() {
+		return PReplyPostID;
 	}
-	public String getPLastReplierID(){
-		return PLastReplierID;
+	public void setPReplyPostID(String pReplyPostID) {
+		PReplyPostID = pReplyPostID;
 	}
 	public Date getPUpdateTime() {
 		return PUpdateTime;

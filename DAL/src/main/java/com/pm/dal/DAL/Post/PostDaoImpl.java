@@ -34,32 +34,47 @@ public class PostDaoImpl implements IPostDao{
 	}
 	
 	
-	public Post addPost(Post post) throws Exception {
+	public Post addNewPost(Post post) throws Exception {
+		// TODO Auto-generated method stub
+	    try{
+	    	
+	      
+     	   sqlMapClient.startTransaction();     	     	   
+     	   sqlMapClient.insert("addPost", post);
+     	   sqlMapClient.insert("addPostTitle", post);
+     	   sqlMapClient.commitTransaction();
+     		
+     	   return post;
+     	
+     	  
+        }catch(Exception e)
+        {
+     	   throw e;
+        }
+        finally{
+     	   
+     	   sqlMapClient.endTransaction();
+     	   
+        }
+	
+			
+	}
+	
+	
+	public Post addReplyPost(Post post) throws Exception {
 		// TODO Auto-generated method stub
 	    try{
         	
      	   sqlMapClient.startTransaction();     	   
-     	   int rowaffect = sqlMapClient.update("addPost", post);
-     	   PostTitle title = new  PostTitle();
-     	   title.setPIsVadilated(post.getPIsVadilated());
-     	   title.setPLastReplierID(post.getPLastReplierID());//here should change to phone?
-     	   title.setPLastUpdateTime(post.getPSubmitTime());
-     	   title.setPostID(post.getPostID());
-     	   title.setPPhone(post.getPPhone());
-     	   title.setPState(0);
-     	   title.setPSubject(post.getPSubject());
-     	   title.setPSubmitTime(post.getPSubmitTime());
-     	   
-     	   if(!this.IsExsitPostTitleById(title.getPostID()))
-     		   sqlMapClient.insert("addPostTitle", title);
-     	   else
-     		  sqlMapClient.update("updatePostTitle", title);
+     	   sqlMapClient.insert("addPost", post);
+     	   int rowaffect = sqlMapClient.update("updatePostTitleByPost", post);
+     	   if(rowaffect  <= 0)
+     		   throw new SQLException("error to update title");
      	   
      	   sqlMapClient.commitTransaction();
-     	   if(rowaffect != 0)
+     	   
      		return post;
-     	
-     	   return null;
+	  
         }catch(Exception e)
         {
      	   throw e;
@@ -73,7 +88,7 @@ public class PostDaoImpl implements IPostDao{
 			
 	}
 
-	private boolean IsExsitPostTitleById(String posttitleID) throws Exception {
+	public boolean IsExsitPostTitleById(String posttitleID) throws Exception {
 		// TODO Auto-generated method stub
 		return this.selectPostTitleById(posttitleID)!= null ;
 	}
@@ -98,21 +113,24 @@ public class PostDaoImpl implements IPostDao{
 	public Post updatePost(Post post) throws Exception {
 		// TODO Auto-generated method stub
       
-            
+			if(post.getPRootID()==null &&post.getPRootID().equals(""))
+				return null; 
            try{
         	
         	   sqlMapClient.startTransaction();
         	   
         	   int rowaffect = sqlMapClient.update("updatePost", post);
+        	   if(rowaffect == 0)
+        		   throw new SQLException("error to update post");
                PostTitle title=this.selectPostTitleById(post.getPostID());
-               if(title == null )
-            	   throw new RuntimeException("found no matched title");
-        	   sqlMapClient.update("updatePostTitleByPost", post);
+               rowaffect=sqlMapClient.update("updatePostTitleByPost", post);
+               if(rowaffect == 0)
+        		   throw new SQLException("error to update post");
         	   sqlMapClient.commitTransaction();
         	   if(rowaffect != 0)
         		return post;
         	
-        	   return null;
+        	  return null;
            }catch(Exception e)
            {
         	   throw e;
@@ -123,10 +141,9 @@ public class PostDaoImpl implements IPostDao{
         	   
            }
 	
+	
 		
 	}
-
-
 
 
 	public Post selectPostById(String id) throws Exception {
@@ -170,7 +187,7 @@ public class PostDaoImpl implements IPostDao{
 		c.put("MIN", end);	
 		c.put("_size", pagesize);
 	
-		List<PostTitle> PostTitles = (List<PostTitle>) sqlMapClient.queryForList("selectRelatedPostTitle", c);
+		List<PostTitle> PostTitles = (List<PostTitle>) sqlMapClient.queryForList("selectPostTitlebyMultiCri", c);
 		
 		return PostTitles ;
 	}
@@ -184,7 +201,7 @@ public class PostDaoImpl implements IPostDao{
 		c.put("MIN", end);	
 		c.put("_size", pagesize);
 	
-		List<Post> Posts = (List<Post>) sqlMapClient.queryForList("selectPost", c);
+		List<Post> Posts = (List<Post>) sqlMapClient.queryForList("selectPostbyMultiCri", c);
 		
 		return Posts ;
 	}
@@ -195,7 +212,7 @@ public class PostDaoImpl implements IPostDao{
 		Map<String,Object> c=new HashMap<String,Object>();
 		
 		
-		c.put("MIN", updatetime);	
+		c.put("Min", updatetime);	
 
 		Integer count = (Integer) sqlMapClient.queryForObject("GetNewPostTitleCountFromLast", c);
 		
@@ -229,4 +246,21 @@ public class PostDaoImpl implements IPostDao{
 		
 		return PostTitles ;
 	}
+
+	public List<Post> selectPostByPhone(String Phone,Date start, Date end, int pagesize)
+			throws Exception {
+		// TODO Auto-generated method stub
+		Map<String,Object> c=new HashMap<String,Object>();
+		c.put("Phone",Phone);
+		c.put("MAX", start);
+		c.put("MIN", end);	
+		c.put("_size", pagesize);
+	
+		List<Post> PostTitles = (List<Post>) sqlMapClient.queryForList("selectPostbyMultiCri", c);
+		
+		return PostTitles ;
+	}
+
+
+
 }
