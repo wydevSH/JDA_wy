@@ -12,10 +12,10 @@ CREATE TABLE tbl_user(
 					URegTime		date		NOT NULL,
 					URealName		varchar(20) DEFAULT '',
 					UGender		int 		NOT NULL,
-					UBirthday		date		NOT NULL,
-					UProfession	varchar(10) 	DEFAULT 0,
+					UBirthday		date		,
+					UProfession	varchar(20) 	DEFAULT 0,
 					UBuilding		int 		DEFAULT 0,
-					URoom			varchar(15)	NOT NULL,
+					URoom			varchar(15)	DEFAULT	'',
 					UFamilyNO		int 		DEFAULT 0,
 					UQQNum		varchar(20) DEFAULT	'',
 					UCarNums		varchar(20) DEFAULT	'',
@@ -25,9 +25,9 @@ CREATE TABLE tbl_user(
 					
 DROP TABLE IF EXISTS tbl_Biotope;
 CREATE TABLE tbl_Biotope(
-					BiotopeID			varchar(10) NOT NULL,
+					BiotopeID			varchar(20) NOT NULL,
 					BBiotopeName		varchar(20) NOT NULL,
-					BPropertyID		varchar(10) ,
+					BPropertyID		varchar(20) ,
 					BAddress			varchar(30) ,
 					BBeginYear		date		,
 					PRIMARY KEY (BiotopeID)
@@ -35,18 +35,18 @@ CREATE TABLE tbl_Biotope(
 					
 DROP TABLE IF EXISTS tbl_Property;
 CREATE TABLE tbl_Property(
-					PropertyID		varchar(15) NOT NULL,
+					PropertyID		varchar(20) NOT NULL,
 					PPropertyName		varchar(20) NOT NULL,
-					PCity				varchar(10) ,
+					PCity				varchar(20) ,
 					PQualification	varchar(20) ,
-					PManager			varchar(10)	,
+					PManager			varchar(20)	,
 					PManagerPhone		varchar(15)	,
 					PRIMARY KEY (PropertyID)
 					)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 					
 DROP TABLE IF EXISTS tbl_PAdmin;
 CREATE TABLE tbl_PAdmin(					
-				PAdministratorID	varchar(10) NOT NULL,
+				PAdministratorID	varchar(20) NOT NULL,
 				PPassword			varchar(20) NOT NULL,
 				PAdminName		varchar(20) NOT NULL,
 				PAdminPhone		varchar(15) NOT NULL,
@@ -60,11 +60,13 @@ DROP TABLE IF EXISTS tbl_RepairTicket;
 CREATE TABLE tbl_RepairTicket(					
 				RepairTicketID	varchar(20 ) NOT NULL,
 				RUserID			varchar(20) NOT NULL,
-				RTicketSubject	varchar(50) NOT NULL,
-				RTicketContent	varchar(140) NOT NULL,
+				RTicketSubject	varchar(50) DEFAULT '',
+				RTicketContent	varchar(140) DEFAULT '',
+				RContactPeople  varchar(50) DEFAULT '',
+				RContactPhone   varchar(50) DEFAULT '',
 				RContactTime	date,		
-				RHandler		varchar(20) NOT NULL,
-				RHanderPhone	varchar(15) NOT NULL,
+				RHandler		varchar(20) DEFAULT '',
+				RHandlerPhone	varchar(15) DEFAULT '',
 				RResumeTimes	int,
 				RStatus			int			DEFAULT 0,
 				RComment		varchar(100) DEFAULT '',
@@ -90,7 +92,7 @@ CREATE TABLE tbl_Complaint(
 				
 DROP TABLE IF EXISTS tbl_PFEE;
 CREATE TABLE tbl_PFEE(				
-				PMFeeID			varchar(10) NOT NULL,
+				PMFeeID			varchar(20) NOT NULL,
 				FUserID			varchar(20) NOT NULL,
 				FeeofPM			float,
 				FIsPaid			int,
@@ -101,8 +103,8 @@ CREATE TABLE tbl_PFEE(
 				
 DROP TABLE IF EXISTS tbl_Notice;
 CREATE TABLE tbl_Notice(				
-				NoticeID		varchar(10) NOT NULL,
-				NBiotopeID		varchar(10) NOT NULL,
+				NoticeID		varchar(20) NOT NULL,
+				NBiotopeID		varchar(20) NOT NULL,
 				NPoster			varchar(20) NOT NULL,
 				NPubTime		date,
 				NExpTime		date,
@@ -132,10 +134,10 @@ CREATE TABLE tbl_Post(
 DROP TABLE IF EXISTS tbl_PostTitle;
 CREATE TABLE tbl_PostTitle(
 				PostID			varchar(20) NOT NULL,
-				PPhone		    varchar(10) NOT NULL,
+				PPhone		    varchar(20) NOT NULL,
 				PSubmitTime		date,
 				PIsVadilated	int,
-				PSubject		varchar(10) NOT NULL,				
+				PSubject		varchar(20) NOT NULL,				
 				PState			int,
 				PLastUpdateTime	date,
 				PRIMARY KEY (PostID)
