@@ -18,6 +18,7 @@ public class userbeanTest {
 		UserBean bean=new UserBean();
 		User user=new User();    	
 		user.setUPhone("1123456");
+		user.setUBiotopeID("Tongji Jiayuan");
 		user.setUPassword("112346");
 		user.setURegTime(new Date());
 		User user1=bean.Save(user);

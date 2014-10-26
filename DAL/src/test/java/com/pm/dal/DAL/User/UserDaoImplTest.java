@@ -19,6 +19,7 @@ public class UserDaoImplTest extends TestCase {
 		User user=new User();
     	Assert.assertNull(dao.Save(user));
 		user.setUPhone("112345");
+		user.setUBiotopeID("Tongji Jiayuan");
 		user.setUPassword("11234");
 		user.setURegTime(new Date());
 		user.setUBirthday(new Date());

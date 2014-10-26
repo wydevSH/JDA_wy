@@ -5,7 +5,11 @@
     <servlet-class>com.pm.web.TestServlet</servlet-class>
   </servlet>
   <servlet-mapping>
+<<<<<<< HEAD
     <servlet-name>TestService</servlet-name>
+=======
+    <servlet-name>UserService</servlet-name>
+>>>>>>> 8c23d64784d906c758c3055f36f9e8417276a4a2
     <url-pattern>/*</url-pattern>
   </servlet-mapping>
 </web-app>

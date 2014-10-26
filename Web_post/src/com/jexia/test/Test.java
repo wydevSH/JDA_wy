@@ -35,6 +35,7 @@ public class Test {
         .create();
 
 		User usr= new User();
+		usr.setUBiotopeID("TJ Home");
 		usr.setUPhone("5093");
 		usr.setUNickname("sasa");
 		usr.setUPassword("sasasa");

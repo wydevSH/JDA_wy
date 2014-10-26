@@ -15,19 +15,19 @@
 	<!-- parameterClass表示参数的内容 -->
 	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
 	<select id="selectUserById" parameterClass="String" resultClass="User">
-		select  UID,UNickname,UPhone,UPassword,URole,URegTime,URealName,UGender,UBirthday,UProfession,UBuilding,URoom,UFamilyNO,UQQNum,UCarNums from tbl_user where UID=#UID#
+		select  UID,UBiotopeID,UNickname,UPhone,UPassword,URole,URegTime,URealName,UGender,UBirthday,UProfession,UBuilding,URoom,UFamilyNO,UQQNum,UCarNums from tbl_user where UID=#UID#
 	</select>
 
 
 	<!-- 注意这里的resultClass类型，使用Student类型取决于queryForList还是queryForObject -->
 	<select id="selectUserByPhone" parameterClass="String"
 		resultClass="User">
-		select UID,UNickname,UPhone,UPassword,URole,URegTime,URealName,UGender,UBirthday,UProfession,UBuilding,URoom,UFamilyNO,UQQNum,UCarNums from tbl_user where UPhone = #phone#
+		select UID,UBiotopeID,UNickname,UPhone,UPassword,URole,URegTime,URealName,UGender,UBirthday,UProfession,UBuilding,URoom,UFamilyNO,UQQNum,UCarNums from tbl_user where UPhone = #phone#
 	</select>
 
 	<insert id="addUser" parameterClass="User">
-		insert into tbl_user(UID,UNickname,UPhone,UPassword,URole,URegTime,URealName,UGender,UBirthday,UProfession,UBuilding,URoom,UFamilyNO,UQQNum,UCarNums) 
-		values(#UID#,#UNickname#,#UPhone#,#UPassword#,#URole#,#URegTime#,#URealName#,#UGender#,#UBirthday#,#UProfession#,#UBuilding#,#URoom#,#UFamilyNO#,#UQQNum#,#UCarNums#);
+		insert into tbl_user(UID,UBiotopeID,UNickname,UPhone,UPassword,URole,URegTime,URealName,UGender,UBirthday,UProfession,UBuilding,URoom,UFamilyNO,UQQNum,UCarNums) 
+		values(#UID#,#UBiotopeID#,#UNickname#,#UPhone#,#UPassword#,#URole#,#URegTime#,#URealName#,#UGender#,#UBirthday#,#UProfession#,#UBuilding#,#URoom#,#UFamilyNO#,#UQQNum#,#UCarNums#);
 	</insert>
 
 	<delete id="deleteUserById" parameterClass="String">
@@ -38,7 +38,7 @@
 
 	<update id="updateUser" parameterClass="User">
 		update tbl_user set
-		UNickname=#UNickname#,UPhone=#UPhone#,UPassword=#UPassword#,URole=#URole#,URegTime=#URegTime#,URealName = #URealName#,UGender = #UGender#,UBirthday = #UBirthday#,UProfession = #UProfession#,UBuilding = #UBuilding#,URoom = #URoom#,UFamilyNO = #UFamilyNO#,UQQNum = #UQQNum#,UCarNums = #UCarNums# where UID=#UID#
+		UBiotopeID=#UBiotopeID#,UNickname=#UNickname#,UPhone=#UPhone#,UPassword=#UPassword#,URole=#URole#,URegTime=#URegTime#,URealName = #URealName#,UGender = #UGender#,UBirthday = #UBirthday#,UProfession = #UProfession#,UBuilding = #UBuilding#,URoom = #URoom#,UFamilyNO = #UFamilyNO#,UQQNum = #UQQNum#,UCarNums = #UCarNums# where UID=#UID#
 	</update>
 
 </sqlMap>

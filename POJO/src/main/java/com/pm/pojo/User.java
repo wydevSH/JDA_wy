@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class User {
 	private String UID;
+	private String UBiotopeID;
 	private String UNickname;
 	private String UPhone;
 	private String UPassword;
@@ -24,6 +25,12 @@ public class User {
 	}
 	public String getUID(){
 		return UID;
+	}
+	public String getUBiotopeID() {
+		return UBiotopeID;
+	}
+	public void setUBiotopeID(String uBiotopeID) {
+		UBiotopeID = uBiotopeID;
 	}
 	public void setUNickname(String UNickname){
 		this.UNickname=UNickname;

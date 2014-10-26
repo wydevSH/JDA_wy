@@ -5,6 +5,7 @@ USE PropertyManagement;
 DROP TABLE IF EXISTS tbl_user;
 CREATE TABLE tbl_user(
 					UID			varchar(20) NOT NULL,
+					UBiotopeID  varchar(20) NOT NULL,
 					UNickname		varchar(20) DEFAULT '',
 					UPhone		varchar(15) NOT NULL,
 					UPassword		varchar(20)	NOT NULL,
@@ -35,7 +36,7 @@ CREATE TABLE tbl_Biotope(
 					
 DROP TABLE IF EXISTS tbl_Property;
 CREATE TABLE tbl_Property(
-					PropertyID		varchar(20) NOT NULL,
+					PropertyID		varchar(15) NOT NULL,
 					PPropertyName		varchar(20) NOT NULL,
 					PCity				varchar(20) ,
 					PQualification	varchar(20) ,
@@ -72,6 +73,8 @@ CREATE TABLE tbl_RepairTicket(
 				RComment		varchar(100) DEFAULT '',
 				RUpdateTime		date,
 				RCount          int,
+				RTicketCommitTime  date,
+				RTicketHandleTime  date,
 				PRIMARY KEY (RepairTicketID)
 				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;				
 				
@@ -81,12 +84,17 @@ CREATE TABLE tbl_Complaint(
 				CUserID				varchar(20) NOT NULL,
 				CTicketSubject		varchar(50) default 'none',
 				CTicketContent		varchar(140) default 'none',
+				CContactPeople      varchar(50) DEFAULT '',
+				CContactPhone       varchar(50) DEFAULT '',
+				CContactTime	    date,		
 				CContactTimeType	int		     default 0,
 				CHandler			varchar(20),
 				CHandlerPhone		varchar(15),
 				CResumeTimes		int,
 				CStatus				int			NOT	NULL  DEFAULT 0,
 				CUpdateTime			date,
+				CTicketCommitTime  date,
+				CTicketHandleTime  date,
 				PRIMARY KEY (ComplaintID)
 				)ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;				
 				
